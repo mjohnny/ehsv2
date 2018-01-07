@@ -28,6 +28,24 @@ Message date: Date du message
 Message: Message
 answer: Réponse
 
+Event: Evénement
+Title: Titre
+Start date: Date de début
+Place number: Place disponible
+Archived: Archivé
+Tag: Catégorie
+Inscriptions : Nombre d'inscrit
+Presentation: Présentation
+Program: Programme
+
+Article: Documentation
+Publication date: Date de publication
+Create date: Date de création/modification
+Content: Contenu
+Diapofolder: Dossier du diapo
+article.diapo.label: Ajouter un diaporama
+article.diapo.placeholder: Choisissez un diaporama
+
 form:
     email: Adresse e-mail
     lastname: Nom ou Raison Sociale

@@ -15,6 +15,8 @@ easy_admin:
         form_theme: 'vertical'
         menu:
             - { label: 'menu.home', route: 'homepage', icon: 'home' }
+            - { entity: 'Event', icon: 'calendar' }
+            - { entity: 'Article', icon: 'book' }
             - { entity: 'User', icon: 'user-circle-o' }
             - label: 'menu.contact'
               children:
@@ -62,3 +64,51 @@ easy_admin:
                 actions:
                     - -edit
                     - { name: 'answer', label: action.answer, icon: 'mail-reply', css_class: 'btn btn-primary'}
+
+        Event:
+            class: AppBundle\Entity\Event
+            list:
+                fields:
+                    - id
+                    - { property: 'title', type: 'text'}
+                    - startDate
+                    - placeNumber
+                    - archived
+                    - inscriptions
+            form:
+                fields:
+                    - { property: 'title', type: 'text' }
+                    - presentation
+                    - placeNumber
+                    - tag
+                    - startDate
+            edit:
+                fields:
+                    - { property: 'program', type: 'AppBundle\Form\ProgramType', type_options: { label_attr: { hidden: hidden} } }
+        Article:
+            class: AppBundle\Entity\Article
+            list:
+                fields:
+                    - id
+                    - createDate
+                    - user
+                    - title
+                    - tag
+                    - publicationDate
+                    - archived
+            form:
+                fields:
+                    - { property: 'createDate', type_options: { disabled: 'disabled', widget: 'single_text', format: 'dd/MM/Y HH:mm' } }
+                    - { property: 'title', type: 'text'}
+                    - { property: 'content', type_options: { required: false} }
+                    - publicationDate
+                    - tag
+                    - { property: 'diapofolder', type: 'AppBundle\Form\DiapoFolderType', type_options: { label_attr: { hidden: hidden} } }
+            new:
+                fields:
+                    - { property: 'event', type: 'entity', class: 'AppBundle\Entity\Event',
+                                            type_options: { query_builder: AppBundle\Repository\EventRepository::available }}
+            edit:
+                fields:
+                    - { property: 'event', type: 'entity', class: 'AppBundle\Entity\Event',
+                                            type_options: { query_builder: AppBundle\Repository\EventRepository::available }}
