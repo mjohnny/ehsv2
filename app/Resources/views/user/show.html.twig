@@ -1,0 +1,60 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>User</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ user.id }}</td>
+            </tr>
+            <tr>
+                <th>Lastname</th>
+                <td>{{ user.lastname }}</td>
+            </tr>
+            <tr>
+                <th>Firstname</th>
+                <td>{{ user.firstname }}</td>
+            </tr>
+            <tr>
+                <th>Address</th>
+                <td>{{ user.address }}</td>
+            </tr>
+            <tr>
+                <th>Zipcode</th>
+                <td>{{ user.zipCode }}</td>
+            </tr>
+            <tr>
+                <th>City</th>
+                <td>{{ user.city }}</td>
+            </tr>
+            <tr>
+                <th>Phone</th>
+                <td>{{ user.phone }}</td>
+            </tr>
+            <tr>
+                <th>Birth</th>
+                <td>{% if user.birth %}{{ user.birth|date('Y-m-d') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Newsletter</th>
+                <td>{% if user.newsletter %}Yes{% else %}No{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Accepted</th>
+                <td>{% if user.accepted %}Yes{% else %}No{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Uptodate</th>
+                <td>{% if user.uptodate %}{{ user.uptodate|date('Y-m-d') }}{% endif %}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('user_index') }}">Back to the list</a>
+        </li>
+    </ul>
+{% endblock %}

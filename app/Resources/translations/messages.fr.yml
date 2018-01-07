@@ -1,0 +1,38 @@
+menu:
+    home: Retour au site
+    user: Adhérants
+    contact: Gestion des contacts
+    mailbox: accès boite mail
+
+action:
+    validated: Valider
+    answer: Répondre
+
+#property
+ID: ID
+User: Adhérant
+Email: Email
+Lastname: Nom
+Firstname: Prénom
+Address: Adresse
+Zip code: Code postal
+City: Ville
+Phone: Téléphone
+Birth: Date de naissance
+Is uptodate: Adhésion à jour
+Newsletter: Recevoir la newsletter
+Roles: Rôles
+Contact: Contact
+Subject: Sujet
+Message date: Date du message
+Message: Message
+answer: Réponse
+
+form:
+    email: Adresse e-mail
+    lastname: Nom ou Raison Sociale
+    firstname: Prénom (Facultatif si Raison Sociale
+    send: Envoyer
+
+contact:
+    subject: Sujet du message
