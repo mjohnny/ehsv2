@@ -241,7 +241,7 @@ $config = array(
 	// Is possible that if you upload very big images the script not work to overcome this increase the php configuration of memory and time limit
 	'image_resizing'                          => true,
 	'image_resizing_width'                    => 0,
-	'image_resizing_height'                   => 640,
+	'image_resizing_height'                   => 1080,
 	'image_resizing_mode'                     => 'auto', // same as $image_max_mode
 	'image_resizing_override'                 => false,
 	// If set to TRUE then you can specify bigger images than $image_max_width & height otherwise if image_resizing is

@@ -67,10 +67,7 @@ class Event
     /**
      * inscriptions event
      *
-     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\EventInscription")
-     * @ORM\JoinTable(name="participate",
-     *     joinColumns={@ORM\JoinColumn(name="event_id", referencedColumnName="id", nullable=true)},
-     *     inverseJoinColumns={@ORM\JoinColumn(name="inscription_id", referencedColumnName="id")})
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\EventInscription", mappedBy="event")
      */
     private $inscriptions;
 

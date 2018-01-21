@@ -2,11 +2,14 @@ menu:
     home: Retour au site
     user: Adhérants
     contact: Gestion des contacts
-    mailbox: accès boite mail
 
 action:
     validated: Valider
     answer: Répondre
+    listRegistered: Liste inscrits
+    mailbox: accès boite mail
+
+create_modify_by: Créer/Modifier par
 
 #property
 ID: ID
@@ -38,6 +41,11 @@ Inscriptions : Nombre d'inscrit
 Presentation: Présentation
 Program: Programme
 
+EventInscription: liste des inscrits
+Validated: Valider
+Mobility: PMR
+Add info: Information complémentaire
+
 Article: Documentation
 Publication date: Date de publication
 Create date: Date de création/modification
@@ -45,6 +53,10 @@ Content: Contenu
 Diapofolder: Dossier du diapo
 article.diapo.label: Ajouter un diaporama
 article.diapo.placeholder: Choisissez un diaporama
+
+Archive: Archive
+Modification date: Date de modification
+Comments: Commentaire
 
 form:
     email: Adresse e-mail

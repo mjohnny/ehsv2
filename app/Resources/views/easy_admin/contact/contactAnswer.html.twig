@@ -2,18 +2,18 @@
 
 {% block main %}
     <div>
-        <section id="main" class="content-header">
+        <section class="content-header">
             <h2>{{'contact.subject'|trans~' : '~contact.subject }}</h2>
             <p>{{ contact.message|raw }}</p>
         </section>
-        <section id="main">
+        <section>
             {% block entity_form %}
                 <form action="{{ path('contact_answer', {id: contact.id}) }}" method="post" class="form-vertical" enctype="multipart/form-data">
                     <div class="row">
                         <div class="col-xs-12">
                             <div class="form-group">
                                 <label for="response">{{ 'answer'|trans }}</label>
-                                <textarea name="response" id="response" cols="30" rows="10"></textarea>
+                                <textarea name="response" cols="30" rows="10"></textarea>
                             </div>
                         </div>
                     </div>

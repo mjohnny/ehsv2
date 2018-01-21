@@ -9,7 +9,6 @@ easy_admin:
         assets:
             favicon: '/favicon.ico'
             js:
-                - '/ehs/js/tinymce/jquery.tinymce.min.js'
                 - '/ehs/js/tinymce/tinymce.min.js'
                 - '/ehs/js/initTiny.js'
         form_theme: 'vertical'
@@ -18,10 +17,8 @@ easy_admin:
             - { entity: 'Event', icon: 'calendar' }
             - { entity: 'Article', icon: 'book' }
             - { entity: 'User', icon: 'user-circle-o' }
-            - label: 'menu.contact'
-              children:
-                - { entity: Contact, icon: 'envelope-o' }
-                - { label: 'menu.mailbox', icon: 'send-o', target: '_blank', url: 'https://mail.ovh.net/roundcube/?_user=contact@ethiquehandicap.comgit ' }
+            - { entity: 'Archive', icon: 'archive' }
+            - { entity: Contact, icon: 'envelope-o' }
 
     entities:
         User:
@@ -30,9 +27,9 @@ easy_admin:
             list:
                 title: menu.user
                 actions:
-                    - edit
-                    - search
                     - -new
+                    - { name: 'edit', icon: 'pencil', label: false }
+                    - { name: 'delete', icon: 'trash', label: false }
                     - { name: 'user_validate', label: action.validated, type: 'route' }
                 fields:
                     - { property: 'lastname' }
@@ -57,9 +54,11 @@ easy_admin:
         Contact:
             class: AppBundle\Entity\Contact
             list:
-              actions:
-                  - -edit
-                  - show
+                actions:
+                    - new
+                    - -edit
+                    - { name: 'show', icon: 'eye', label: false }
+                    - { name: 'delete', icon: 'trash', label: false }
             show:
                 actions:
                     - -edit
@@ -68,6 +67,10 @@ easy_admin:
         Event:
             class: AppBundle\Entity\Event
             list:
+                actions:
+                    - { name: 'edit', icon: 'pencil', label: false }
+                    - { name: 'delete', icon: 'trash', label: false }
+                    - { name: 'listRegistered', label: 'action.listRegistered' }
                 fields:
                     - id
                     - { property: 'title', type: 'text'}
@@ -88,10 +91,13 @@ easy_admin:
         Article:
             class: AppBundle\Entity\Article
             list:
+                actions:
+                    - { name: 'edit', icon: 'pencil', label: false }
+                    - { name: 'delete', icon: 'trash', label: false }
                 fields:
                     - id
                     - createDate
-                    - user
+                    - { property: 'user', label: 'create_modify_by' }
                     - title
                     - tag
                     - publicationDate
@@ -112,3 +118,43 @@ easy_admin:
                 fields:
                     - { property: 'event', type: 'entity', class: 'AppBundle\Entity\Event',
                                             type_options: { query_builder: AppBundle\Repository\EventRepository::available }}
+
+        EventInscription:
+            class: AppBundle\Entity\EventInscription
+            list:
+                max_results: 100
+                dql_filter: 'entity.event = eventId'
+                actions:
+                    - -search
+                    - -edit
+                    - -new
+                    - { name: 'delete', icon: 'trash', label: false }
+                fields:
+                    - id
+                    - lastname
+                    - firstname
+                    - phone
+                    - email
+                    - { property: 'mobility', type: 'boolean' }
+                    - addInfo
+                    - validated
+
+        Archive:
+            class: AppBundle\Entity\Archive
+            list:
+                actions:
+                    - { name: 'show', icon: 'eye', label: false }
+                    - { name: 'edit', icon: 'pencil', label: false }
+                    - { name: 'delete', icon: 'trash', label: false }
+            form:
+                fields:
+                    - title
+                    - comments
+
+            show:
+                fields:
+                    - user
+                    - title
+                    - comments
+                    - createDate
+                    - modificationDate

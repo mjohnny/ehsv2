@@ -73,6 +73,12 @@ class EventInscription
      */
     private $addInfo;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Event", inversedBy="inscriptions")
+     * @ORM\JoinColumn(name="event_id", referencedColumnName="id")
+     */
+    private $event;
+
 
     /**
      * Get id
@@ -194,6 +200,22 @@ class EventInscription
     public function setAddInfo($addInfo)
     {
         $this->addInfo = $addInfo;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getEvent()
+    {
+        return $this->event;
+    }
+
+    /**
+     * @param mixed $event
+     */
+    public function setEvent($event)
+    {
+        $this->event = $event;
     }
 }
 
