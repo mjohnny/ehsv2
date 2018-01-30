@@ -10,4 +10,17 @@ namespace AppBundle\Repository;
  */
 class ArticleRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function getNoArchivedLastArticles()
+    {
+        $lastArticles = $this->createQueryBuilder('a')
+            ->where('a.archived = 0')
+            ->andWhere('a.publicationDate < :now')
+            ->orderBy('a.publicationDate', 'DESC')
+            ->setParameter('now', new \DateTime())
+            ->getQuery()
+            ->setMaxResults(3)
+            ->getResult();
+
+        return $lastArticles;
+    }
 }

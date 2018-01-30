@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <section id="main" class="wrapper special">
+        <div class="container">
+            <img src="{{ asset('ehs/images/ehs.png') }}"
+                 class="image fit" alt="logo Ethique handicap et société">
+
+            {{ archive.comments|raw }}<br>
+
+            <ul class="actions">
+                <li><a href="#" class="button big alt">{{ 'button.join us'|trans }}</a></li>
+            </ul>
+
+            {#<ul class="actions">#}
+            {#<li><button type="button" class="button big alt asso" data-toggle="modal" data-target="#newAdhering">#}
+            {#Nous rejoindre#}
+            {#</button></li>#}
+            {#</ul>#}
+        </div>
+    </section>
+    {#{{ render(controller('EHSBundle:User:new')) }}#}
+{% endblock %}

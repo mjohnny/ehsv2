@@ -29,6 +29,7 @@ Contact: Contact
 Subject: Sujet
 Message date: Date du message
 Message: Message
+your message: Taper votre message
 answer: Réponse
 
 Event: Evénement
@@ -63,6 +64,27 @@ form:
     lastname: Nom ou Raison Sociale
     firstname: Prénom (Facultatif si Raison Sociale
     send: Envoyer
+    reset: Effacer
 
 contact:
     subject: Sujet du message
+
+########    front #######
+site:
+    name: éthique, handicap et société
+    subname: mieux vivre ensemble
+    stay in touch: restons en contact
+    receive newsletter: s'inscrire à la newsletter
+header:
+    menu:
+        title: Menu
+        asso present: L'association
+        admin: Gestion du site
+button:
+    join us: nous rejoindre
+    learn more: nous connaître
+    show more: voir plus
+    show: voir
+    show gallery: voir les galleries
+link:
+    legales terms: Informations légales

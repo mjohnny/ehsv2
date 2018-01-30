@@ -67,7 +67,7 @@ class Article
     /**
      * article tag
      *@ORM\ManyToOne(targetEntity="AppBundle\Entity\Tag")
-     * @ORM\JoinColumn(name="tag_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="tag_id", referencedColumnName="id", nullable=false)
      */
     private $tag;
 
@@ -79,7 +79,7 @@ class Article
     private $event;
 
     /**
-     * @var array)
+     * @var array
      * @ORM\Column(name="diapofolder", type="array", nullable=true)
      */
     private $diapofolder;
@@ -231,7 +231,7 @@ class Article
     }
 
     /**
-     * @return string
+     * @return array
      */
     public function getDiapofolder()
     {

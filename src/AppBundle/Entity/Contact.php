@@ -67,11 +67,6 @@ class Contact
     private $messageDate;
 
     /**
-     * @var bool
-     */
-    private $copy;
-
-    /**
      * Contact constructor.
      * @param \DateTime $messageDate
      */
@@ -213,22 +208,6 @@ class Contact
     public function setSubject($subject)
     {
         $this->subject = $subject;
-    }
-
-    /**
-     * @return bool
-     */
-    public function isCopy()
-    {
-        return $this->copy;
-    }
-
-    /**
-     * @param bool $copy
-     */
-    public function setCopy($copy)
-    {
-        $this->copy = $copy;
     }
 }
 

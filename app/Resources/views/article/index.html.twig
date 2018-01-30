@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Articles list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Createdate</th>
+                <th>Title</th>
+                <th>Content</th>
+                <th>Publicationdate</th>
+                <th>Archived</th>
+                <th>Diapofolder</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for article in articles %}
+            <tr>
+                <td><a href="{{ path('article_show', { 'id': article.id }) }}">{{ article.id }}</a></td>
+                <td>{% if article.createDate %}{{ article.createDate|date('Y-m-d') }}{% endif %}</td>
+                <td>{{ article.title }}</td>
+                <td>{{ article.content }}</td>
+                <td>{% if article.publicationDate %}{{ article.publicationDate|date('Y-m-d') }}{% endif %}</td>
+                <td>{% if article.archived %}Yes{% else %}No{% endif %}</td>
+                <td>{% if article.diapofolder %}{{ article.diapofolder|join(', ') }}{% endif %}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('article_show', { 'id': article.id }) }}">show</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    
+{% endblock %}

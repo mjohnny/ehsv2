@@ -1,13 +1,24 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <title>{% block title %}EHS!{% endblock %}</title>
         <meta charset="UTF-8" />
-        <title>{% block title %}Welcome!{% endblock %}</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="stylesheet" href="{{ asset('bundles/easyadmin/stylesheet/bootstrap.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('ehs/css/main.css') }}">
         {% block stylesheets %}{% endblock %}
-        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+        {#<link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />#}
     </head>
     <body>
+    {% include 'header.html.twig' %}
         {% block body %}{% endblock %}
+    {% include'footer.html.twig' %}
+
+        <script src="{{ asset('ehs/js/jquery.min.js') }}"></script>
+        <script src="{{ asset('bundles/easyadmin/javascript/bootstrap.min.js') }}"></script>
+        <script src="{{ asset('ehs/js/skel.min.js') }}"></script>
+        <script src="{{ asset('ehs/js/util.js') }}"></script>
+        <script src="{{ asset('ehs/js/main.js') }}"></script>
         {% block javascripts %}{% endblock %}
     </body>
 </html>

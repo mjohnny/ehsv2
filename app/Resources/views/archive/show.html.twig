@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Archive</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ archive.id }}</td>
+            </tr>
+            <tr>
+                <th>Createdate</th>
+                <td>{% if archive.createDate %}{{ archive.createDate|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Modificationdate</th>
+                <td>{% if archive.modificationDate %}{{ archive.modificationDate|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Title</th>
+                <td>{{ archive.title }}</td>
+            </tr>
+            <tr>
+                <th>Comments</th>
+                <td>{{ archive.comments }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('archive_index') }}">Back to the list</a>
+        </li>
+    </ul>
+{% endblock %}
