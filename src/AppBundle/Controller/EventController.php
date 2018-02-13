@@ -25,7 +25,7 @@ class EventController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $events = $em->getRepository('AppBundle:Event')->findAll();
+        $events = $em->getRepository('AppBundle:Event')->findBy([], ['startDate' => 'DESC']);
 
         return $this->render('event/index.html.twig', array(
             'events' => $events,
@@ -40,9 +40,9 @@ class EventController extends Controller
      */
     public function showAction(Request $request, Event $event)
     {
-        $url =$request->headers->get('referer');
-        if (!$url){
-            $url =$this->generateUrl('homepage');
+        $url = $request->headers->get('referer');
+        if (!$url) {
+            $url = $this->generateUrl('homepage');
         }
         return $this->render('event/show.html.twig', array(
             'bachUrl' => $url,

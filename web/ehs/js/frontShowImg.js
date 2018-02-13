@@ -1,29 +1,30 @@
-$('.frontShow').each(function (index) {
+$('.frontShow').each(function (indexFrontShow, frontShow) {
         var img = this.querySelector('img');
         if (img) {
             img = img.getAttribute('src');
-            $('#image' + (index + 1)).attr('src', img);
+            $('#image' + (indexFrontShow + 1)).attr('src', img);
         }
+        var allContent = frontShow.querySelectorAll('p,H1,H2,H3,H4,H5');
+        var newText = false;
+        $(allContent).each(function (indexContent, content) {
+            var child = content;
+            while (child.nodeName !== '#text') {
+                if (child.firstChild) {
+                    child = child.firstChild;
+                } else {
+                    break;
+                }
+            }
+            if (child.nodeName === "#text" && !newText) {
+                if (child.nodeValue.length > 1) {
+                    if (child.nodeValue.length > 100) {
+                        newText = child.nodeValue.slice(0, 100) + ' ...';
+                    } else {
+                        newText = child.nodeValue + ' ...';
+                    }
+                }
+                frontShow.innerText = newText;
+            }
+        });
     }
 );
-$('.content img').remove();
-$('.frontShow p').each(function () {
-    if (this.firstChild && this.firstChild.length > 1) {
-        if (this.firstChild.length > 300) {
-            var newtext = document.createTextNode(this.innerText.slice(0, 230) + '...');
-            var newp = document.createElement('p').appendChild(newtext);
-            this.firstChild.remove();
-            this.appendChild(newp);
-        }
-    } else {
-        this.remove();
-    }
-});
-$('.frontShow').each(function () {
-    var paragraphs = this.querySelectorAll('p');
-    for (var i = 0; i < paragraphs.length; i++) {
-        if (i > 0) {
-            paragraphs[i].remove();
-        }
-    }
-});

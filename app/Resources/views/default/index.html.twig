@@ -66,7 +66,8 @@
             </header>
             <div class="image-grid">
                 {% for image in images %}
-                    <a href="#" class="image"><img src="{{ asset('thumbs/images/14 janvier 2017/'~image) }}" alt="{{ image }}" /></a>
+                    <a href="#" class="image"><img src="{{ asset('thumbs/images/14 janvier 2017/'~image) }}"
+                                                   alt="{{ image }}"/></a>
                 {% endfor %}
             </div>
             <ul class="actions">
@@ -96,29 +97,29 @@
                 <p>{{ 'site.stay in touch'|trans }}</p>
             </header>
             {{ form_start(formContact) }}
-                <div class="container 75%">
-                    <div class="row uniform 50%">
-                        <div class="12u$">
-                            {{ form_widget(formContact.email) }}
-                        </div>
-                        <div class="6u 12u$(xsmall)">
-                            {{ form_widget(formContact.lastname) }}
-                        </div>
-                        <div class="6u$ 12u$(xsmall)">
-                            {{ form_widget(formContact.firstname) }}
-                        </div>
-                        <div class="12u$">
-                            {{ form_widget(formContact.subject) }}
-                        </div>
-                        <div class="12u$">
-                            {{ form_widget(formContact.message) }}
-                        </div>
+            <div class="container 75%">
+                <div class="row uniform 50%">
+                    <div class="12u$">
+                        {{ form_widget(formContact.email) }}
+                    </div>
+                    <div class="6u 12u$(xsmall)">
+                        {{ form_widget(formContact.lastname) }}
+                    </div>
+                    <div class="6u$ 12u$(xsmall)">
+                        {{ form_widget(formContact.firstname) }}
+                    </div>
+                    <div class="12u$">
+                        {{ form_widget(formContact.subject) }}
+                    </div>
+                    <div class="12u$">
+                        {{ form_widget(formContact.message) }}
                     </div>
                 </div>
-                <ul class="actions">
-                    <li><input type="submit" class="special" value="{{ 'form.send'|trans }}"/></li>
-                    <li><input type="reset" class="alt" value="{{ 'form.reset'|trans }}"/></li>
-                </ul>
+            </div>
+            <ul class="actions">
+                <li><input type="submit" class="special" value="{{ 'form.send'|trans }}"/></li>
+                <li><input type="reset" class="alt" value="{{ 'form.reset'|trans }}"/></li>
+            </ul>
             {{ form_end(formContact) }}
             <div>
             </div>

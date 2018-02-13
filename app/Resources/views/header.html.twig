@@ -10,7 +10,17 @@
         <li><a href="{{ path('homepage') }}">
                 <i class="fa fa-home" aria-hidden="true"></i></a></li>
         <li><a href="{{ path('present_asso') }}">{{ 'header.menu.asso present'|trans }}</a></li>
-        <li><a href="elements.html">Elements</a></li>
+        <li><a href="{{ path('event_index') }}">{{ 'header.menu.event'|trans }}</a></li>
+        <li><a href="{{ path('article_index') }}">{{ 'header.menu.article'|trans }}</a>
+            <ul class="sublinks">
+                <li><a href="{{ path('article_taged', {'id':1 }) }}">Culture</a></li>
+                <li><a href="{{ path('article_taged', {'id':2 }) }}">Ethique</a></li>
+                <li><a href="{{ path('article_taged', {'id':3 }) }}">Santé</a></li>
+                <li><a href="{{ path('article_taged', {'id':4 }) }}">Sport</a></li>
+                <li><a href="{{ path('article_taged', {'id':5 }) }}">Travail</a></li>
+                <li><a href="{{ path('article_taged', {'id':6 }) }}">Accessibilité</a></li>
+            </ul>
+        </li>
         {% if is_granted('ROLE_ADMIN') %}
             <li><a href="{{ path('admin') }}">{{ 'header.menu.admin'|trans }}</a></li>
         {% endif %}

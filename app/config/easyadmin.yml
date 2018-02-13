@@ -19,6 +19,8 @@ easy_admin:
             - { entity: 'User', icon: 'user-circle-o' }
             - { entity: 'Archive', icon: 'archive' }
             - { entity: Contact, icon: 'envelope-o' }
+    list:
+        max_results: 100
 
     entities:
         User:
@@ -50,7 +52,7 @@ easy_admin:
                     - { property: 'city' }
                     - { property: 'phone' }
                     - { property: 'roles', type: 'choice', type_options: { expanded: true, multiple: true,
-                      choices: { 'Utilisateur': 'ROLE_USER', 'Presse': 'ROLE_PRESSE', 'Modérateur': 'ROLE_ADMIN', 'Administrateur': 'ROLE_SUPER_ADMIN' } } }
+                      choices: { 'User': 'ROLE_USER', 'Press': 'ROLE_PRESSE', 'Moderator': 'ROLE_ADMIN', 'Administrator': 'ROLE_SUPER_ADMIN' } } }
         Contact:
             class: AppBundle\Entity\Contact
             list:
@@ -122,7 +124,6 @@ easy_admin:
         EventInscription:
             class: AppBundle\Entity\EventInscription
             list:
-                max_results: 100
                 dql_filter: 'entity.event = eventId'
                 actions:
                     - -search

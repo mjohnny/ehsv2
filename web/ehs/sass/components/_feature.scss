@@ -40,6 +40,10 @@
 			width: 52%;
 		}
 
+		.frontShow {
+			min-height: 85px;
+		}
+
 		@include breakpoint(large) {
 			margin-bottom: (_size(element-margin) * 2);
 

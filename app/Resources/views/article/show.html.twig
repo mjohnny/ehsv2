@@ -1,44 +1,40 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Article</h1>
+    <section id="main" class="wrapper">
+        <p style="margin-left: 70%">{{'site.published at'|trans ~ article.publicationDate|localizeddate('none', 'none', null, null, 'd MMMM Y') }}</p>
+        <div class="container">
+            <ul class="actions event">
+                <li>
+                    <a href="{{ bachUrl }}" class="button alt">{{ 'button.back'|trans }}</a>
+                </li>
+                <li>
+                    <div class="fb-share-button" data-href="{{  app.request.scheme ~ '://' ~ app.request.httpHost ~ app.request.requestUri }}" data-layout="button" data-size="large" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u={{  app.request.scheme ~ '://' ~ app.request.httpHost ~ app.request.requestUri }}%2F&amp;src=sdkpreparse">Partager</a></div>
+                </li>
+                <li>
+                    <a href="https://twitter.com/share" class="twitter-share-button" data-size="large">Tweet</a>
+                    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+                </li>
+            </ul>
 
-    <table>
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ article.id }}</td>
-            </tr>
-            <tr>
-                <th>Createdate</th>
-                <td>{% if article.createDate %}{{ article.createDate|date('Y-m-d') }}{% endif %}</td>
-            </tr>
-            <tr>
-                <th>Title</th>
-                <td>{{ article.title }}</td>
-            </tr>
-            <tr>
-                <th>Content</th>
-                <td>{{ article.content }}</td>
-            </tr>
-            <tr>
-                <th>Publicationdate</th>
-                <td>{% if article.publicationDate %}{{ article.publicationDate|date('Y-m-d') }}{% endif %}</td>
-            </tr>
-            <tr>
-                <th>Archived</th>
-                <td>{% if article.archived %}Yes{% else %}No{% endif %}</td>
-            </tr>
-            <tr>
-                <th>Diapofolder</th>
-                <td>{% if article.diapofolder %}{{ article.diapofolder|join(', ') }}{% endif %}</td>
-            </tr>
-        </tbody>
-    </table>
+            <header class="major special">
+                <h2>{{ article.title|raw }}</h2>
+            </header>
 
-    <ul>
-        <li>
-            <a href="{{ path('article_index') }}">Back to the list</a>
-        </li>
-    </ul>
+            {{ article.content|raw }}
+
+        </div>
+    </section>
+    {% if article.diapofolder is defined and article.diapofolder is not null %}
+        {#{{ render(controller('EHSBundle:Default:showdiapo', {'diapo' : article.diapofolder})) }}#}
+    {% endif %}
+    <div id="fb-root"></div>
+    <script>(function(d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s); js.id = id;
+            js.src = "//connect.facebook.net/fr_FR/sdk.js#xfbml=1&version=v2.8";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+    </script>
 {% endblock %}

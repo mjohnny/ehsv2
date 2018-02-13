@@ -31,6 +31,9 @@ Message date: Date du message
 Message: Message
 your message: Taper votre message
 answer: Réponse
+Press: Presse
+Moderator: Modérateur
+Administrator: Administrateur
 
 Event: Evénement
 Title: Titre
@@ -75,10 +78,13 @@ site:
     subname: mieux vivre ensemble
     stay in touch: restons en contact
     receive newsletter: s'inscrire à la newsletter
+    published at: document publié le
 header:
     menu:
         title: Menu
         asso present: L'association
+        event: événements
+        article: documentations
         admin: Gestion du site
 button:
     join us: nous rejoindre
@@ -86,5 +92,13 @@ button:
     show more: voir plus
     show: voir
     show gallery: voir les galleries
+    back: retour
+    show program: Voir le programme
+    event register: s'inscrire à l'événement
+    event access conference: accéder aux conférences
 link:
     legales terms: Informations légales
+
+event:
+    no more place: Nous sommes désolés, il n'y a plus de place disponible pour cet événement.
+    inscription ok: Votre inscription a bien été enregistrée.

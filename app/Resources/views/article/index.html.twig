@@ -1,42 +1,34 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Articles list</h1>
-
-    <table>
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Createdate</th>
-                <th>Title</th>
-                <th>Content</th>
-                <th>Publicationdate</th>
-                <th>Archived</th>
-                <th>Diapofolder</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for article in articles %}
-            <tr>
-                <td><a href="{{ path('article_show', { 'id': article.id }) }}">{{ article.id }}</a></td>
-                <td>{% if article.createDate %}{{ article.createDate|date('Y-m-d') }}{% endif %}</td>
-                <td>{{ article.title }}</td>
-                <td>{{ article.content }}</td>
-                <td>{% if article.publicationDate %}{{ article.publicationDate|date('Y-m-d') }}{% endif %}</td>
-                <td>{% if article.archived %}Yes{% else %}No{% endif %}</td>
-                <td>{% if article.diapofolder %}{{ article.diapofolder|join(', ') }}{% endif %}</td>
-                <td>
-                    <ul>
-                        <li>
-                            <a href="{{ path('article_show', { 'id': article.id }) }}">show</a>
-                        </li>
-                    </ul>
-                </td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-
-    
+    <!-- One -->
+    <section id="one" class="wrapper style1">
+        <div class="inner">
+            {% for article in articles %}
+                {% set feature= "feature left" %}
+                {% if loop.index % 2 ==0 %}
+                    {% set feature= "feature right" %}
+                {% endif %}
+                <article class="{{ feature }}">
+                    <span class="image"><img id="image{{ loop.index }}" src="{{ asset('ehs/images/ehs.png') }}"
+                                             alt="logo ehs"/></span>
+                    <div class="content">
+                        <h2>{{ article.title|raw }}</h2>
+                        <div class="frontShow">
+                            {{ article.content|raw }}
+                        </div>
+                        <ul class="actions">
+                            <li>
+                                <a href="{{ path('article_show', {'id': article.id}) }}"
+                                   class="button alt">{{ "button.show"|trans }}</a>
+                            </li>
+                        </ul>
+                    </div>
+                </article>
+            {% endfor %}
+        </div>
+    </section>
+{% endblock %}
+{% block javascripts %}
+    <script src="{{ asset('ehs/js/frontShowImg.js') }}"></script>
 {% endblock %}
