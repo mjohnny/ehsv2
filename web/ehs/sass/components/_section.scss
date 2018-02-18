@@ -17,8 +17,35 @@ section, article, header {
     text-align: center;
   }
 }
-#four{
+
+#four {
   border-top: solid 1px _palette($section_palette, border2-bg);
+}
+
+#date {
+  text-align: end;
+}
+
+.diapogallery {
+  max-width: 900px;
+  margin: auto;
+  margin-top: 50px;
+  margin-bottom: 40px;
+  background-color: _palette($section_palette, bg);
+  text-align: center;
+
+  div:nth-child(n) {
+    padding: 0;
+  }
+
+  h2 {
+    margin-top: 20px;
+    color: _palette($section_palette, fg-bold);
+  }
+
+  .actions {
+    margin-top: 40px;
+  }
 }
 
 header {

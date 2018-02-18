@@ -1362,6 +1362,24 @@ section.special, article.special, header.special {
 #four {
   border-top: solid 1px rgba(255, 255, 255, 0.1); }
 
+#date {
+  text-align: end; }
+
+.diapogallery {
+  max-width: 900px;
+  margin: auto;
+  margin-top: 50px;
+  margin-bottom: 40px;
+  background-color: #1E2832;
+  text-align: center; }
+  .diapogallery div:nth-child(n) {
+    padding: 0; }
+  .diapogallery h2 {
+    margin-top: 20px;
+    color: #fff; }
+  .diapogallery .actions {
+    margin-top: 40px; }
+
 header p {
   margin: 0 0 1.5em 0;
   position: relative;

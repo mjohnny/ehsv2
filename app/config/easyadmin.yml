@@ -18,7 +18,8 @@ easy_admin:
             - { entity: 'Article', icon: 'book' }
             - { entity: 'User', icon: 'user-circle-o' }
             - { entity: 'Archive', icon: 'archive' }
-            - { entity: Contact, icon: 'envelope-o' }
+            - { entity: 'Contact', icon: 'envelope-o' }
+            - { label: 'menu.gallery', route: 'gallery_new', icon: 'camera' }
     list:
         max_results: 100
 

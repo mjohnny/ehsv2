@@ -2,6 +2,7 @@ menu:
     home: Retour au site
     user: Adhérants
     contact: Gestion des contacts
+    gallery: Gestion des galleries
 
 action:
     validated: Valider
@@ -68,6 +69,7 @@ form:
     firstname: Prénom (Facultatif si Raison Sociale
     send: Envoyer
     reset: Effacer
+    new diapo: Créer un diaporama
 
 contact:
     subject: Sujet du message
@@ -96,9 +98,18 @@ button:
     show program: Voir le programme
     event register: s'inscrire à l'événement
     event access conference: accéder aux conférences
+    diapo create: créer le diaporama
 link:
     legales terms: Informations légales
 
 event:
     no more place: Nous sommes désolés, il n'y a plus de place disponible pour cet événement.
     inscription ok: Votre inscription a bien été enregistrée.
+    program: programme de la journée
+
+diapo:
+    show : voir le diaporama
+    diaporama: Diaporama
+    all galleries: toutes les galleries
+    created: Le diaporama a bien été créé.
+    folder name: nom du dossier

@@ -66,12 +66,12 @@
             </header>
             <div class="image-grid">
                 {% for image in images %}
-                    <a href="#" class="image"><img src="{{ asset('thumbs/images/14 janvier 2017/'~image) }}"
+                    <a href="{{ path('index_gallery') }}" class="image"><img src="{{ asset('thumbs/images/14 janvier 2017/'~image) }}"
                                                    alt="{{ image }}"/></a>
                 {% endfor %}
             </div>
             <ul class="actions">
-                <li><a href="#" class="button big alt">{{ 'button.show gallery'|trans }}</a></li>
+                <li><a href="{{ path('index_gallery') }}" class="button big alt">{{ 'button.show gallery'|trans }}</a></li>
             </ul>
         </div>
     </section>

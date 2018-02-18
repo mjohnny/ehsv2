@@ -1,9 +1,6 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    {#{{ render(controller('EHSBundle:EventInscription:new', {'event': event.id})) }}#}
-    {#{{ render(controller('EHSBundle:Program:show', {'id': event.program.id})) }}#}
-
     {% set dispo = event.placeNumber - event.inscriptions|length %}
     <section id="main" class="wrapper eventShow">
         {% set results = app.request.query %}
@@ -18,10 +15,8 @@
                     <a href="{{ bachUrl }}" class="button alt">{{ 'button.back'|trans }}</a>
                 </li>
                 <li>
-                    <button type="button" class="button special" data-toggle="modal"
-                            data-target="#program{{ event.program.id }}">
-                        {{ 'button.show program'|trans }}
-                    </button>
+                    <a href="{{ path('program_show', {'id': event.id}) }}"
+                       class="button special">{{ 'button.show program'|trans }}</a>
                 </li>
                 {% if dispo and 'now'|date('Ymd') <= event.startDate|date('Ymd') %}
                     <li>
@@ -32,36 +27,49 @@
                 {% endif %}
                 {% if event.article %}
                     <li>
-                        <a href="{{ path('article_show', {'id': event.article.id}) }}" class="button alt">{{ 'button.event access conference'|trans }}</a>
+                        <a href="{{ path('article_show', {'id': event.article.id}) }}"
+                           class="button alt">{{ 'button.event access conference'|trans }}</a>
                     </li>
                 {% endif %}
                 <li>
-                    <div class="fb-share-button" data-href="{{  app.request.scheme ~ '://' ~ app.request.httpHost ~ app.request.requestUri }}" data-layout="button" data-size="large" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u={{  app.request.scheme ~ '://' ~ app.request.httpHost ~ app.request.requestUri }}%2F&amp;src=sdkpreparse">Partager</a></div>
+                    <div class="fb-share-button"
+                         data-href="{{ app.request.scheme ~ '://' ~ app.request.httpHost ~ app.request.requestUri }}"
+                         data-layout="button" data-size="large" data-mobile-iframe="true"><a
+                                class="fb-xfbml-parse-ignore" target="_blank"
+                                href="https://www.facebook.com/sharer/sharer.php?u={{ app.request.scheme ~ '://' ~ app.request.httpHost ~ app.request.requestUri }}%2F&amp;src=sdkpreparse">Partager</a>
+                    </div>
                 </li>
                 <li>
                     <a href="https://twitter.com/share" class="twitter-share-button" data-size="large">Tweet</a>
-                    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+                    <script>!function (d, s, id) {
+                            var js, fjs = d.getElementsByTagName(s)[0],
+                                p = /^http:/.test(d.location) ? 'http' : 'https';
+                            if (!d.getElementById(id)) {
+                                js = d.createElement(s);
+                                js.id = id;
+                                js.src = p + '://platform.twitter.com/widgets.js';
+                                fjs.parentNode.insertBefore(js, fjs);
+                            }
+                        }(document, 'script', 'twitter-wjs');</script>
                 </li>
             </ul>
             {#{% if not dispo %}#}
-                <div class="bg-info">
-                    <h4>{{ 'event.no more place'|trans }}</h4>
-                </div>
+            <div class="bg-info">
+                <h4>{{ 'event.no more place'|trans }}</h4>
+            </div>
             {#{% endif %}#}
 
-            <p class="event">{{ event.presentation|raw }}</p>
+            <p>{{ event.presentation|raw }}</p>
 
             <ul class="actions event">
                 <li>
                     <a href="{{ bachUrl }}" class="button alt">{{ 'button.back'|trans }}</a>
                 </li>
                 <li>
-                    <button type="button" class="button special" data-toggle="modal"
-                            data-target="#program{{ event.program.id }}">
-                        {{ 'button.show program'|trans }}
-                    </button>
+                    <a href="{{ path('program_show', {'id': event.id}) }}"
+                       class="button special">{{ 'button.show program'|trans }}</a>
                 </li>
-                {% if dispo and 'now'|date('Ymd') <= event.startDate|date('Ymd')%}
+                {% if dispo and 'now'|date('Ymd') <= event.startDate|date('Ymd') %}
                     <li>
                         <button type="button" class="button special" data-toggle="modal" data-target="#newInscription">
                             {{ 'button.event register'|trans }}
@@ -70,24 +78,40 @@
                 {% endif %}
                 {% if event.article %}
                     <li>
-                        <a href="{{ path('article_show', {'id': event.article.id}) }}" class="button alt">{{ 'button.event access conference'|trans }}</a>
+                        <a href="{{ path('article_show', {'id': event.article.id}) }}"
+                           class="button alt">{{ 'button.event access conference'|trans }}</a>
                     </li>
                 {% endif %}
                 <li>
-                    <div class="fb-share-button" data-href="{{  app.request.scheme ~ '://' ~ app.request.httpHost ~ app.request.requestUri }}" data-layout="button" data-size="large" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u={{  app.request.scheme ~ '://' ~ app.request.httpHost ~ app.request.requestUri }}%2F&amp;src=sdkpreparse">Partager</a></div>
+                    <div class="fb-share-button"
+                         data-href="{{ app.request.scheme ~ '://' ~ app.request.httpHost ~ app.request.requestUri }}"
+                         data-layout="button" data-size="large" data-mobile-iframe="true"><a
+                                class="fb-xfbml-parse-ignore" target="_blank"
+                                href="https://www.facebook.com/sharer/sharer.php?u={{ app.request.scheme ~ '://' ~ app.request.httpHost ~ app.request.requestUri }}%2F&amp;src=sdkpreparse">Partager</a>
+                    </div>
                 </li>
                 <li>
                     <a href="https://twitter.com/share" class="twitter-share-button" data-size="large">Tweet</a>
-                    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+                    <script>!function (d, s, id) {
+                            var js, fjs = d.getElementsByTagName(s)[0],
+                                p = /^http:/.test(d.location) ? 'http' : 'https';
+                            if (!d.getElementById(id)) {
+                                js = d.createElement(s);
+                                js.id = id;
+                                js.src = p + '://platform.twitter.com/widgets.js';
+                                fjs.parentNode.insertBefore(js, fjs);
+                            }
+                        }(document, 'script', 'twitter-wjs');</script>
                 </li>
             </ul>
         </div>
         <div id="fb-root"></div>
-        <script>(function(d, s, id) {
+        <script>(function (d, s, id) {
                 var js, fjs = d.getElementsByTagName(s)[0];
                 if (d.getElementById(id)) return;
-                js = d.createElement(s); js.id = id;
-                js.src = "//connect.facebook.net/fr_FR/sdk.js#xfbml=1&version=v2.8";
+                js = d.createElement(s);
+                js.id = id;
+                js.src = 'https://connect.facebook.net/fr_FR/sdk.js#xfbml=1&version=v2.12';
                 fjs.parentNode.insertBefore(js, fjs);
             }(document, 'script', 'facebook-jssdk'));
         </script>

@@ -3,6 +3,7 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Event;
+use AppBundle\Entity\Program;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -48,6 +49,19 @@ class EventController extends Controller
             'bachUrl' => $url,
             'event' => $event,
         ));
+    }
 
+    /**
+     * Finds and displays a program entity.
+     *
+     * @Route("/{id}/program", name="program_show")
+     * @Method("GET")
+     */
+    public function programAction(Event $event)
+    {
+
+        return $this->render('program/show.html.twig', array(
+            'event' => $event,
+        ));
     }
 }
