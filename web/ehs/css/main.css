@@ -2584,6 +2584,21 @@ button,
     .wrapper {
       padding: 2em 1em 0.1em 1em; } }
 
+#flash-messages {
+  font-size: x-large;
+  top: 150px;
+  position: fixed;
+  z-index: 10000; }
+  #flash-messages span {
+    margin: -20px 5px -20px;
+    font-size: 1.60em; }
+
+.bg-info {
+  text-align: center;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  font-size: x-large; }
+
 /* Header */
 body {
   padding-top: 3.125em; }

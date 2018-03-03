@@ -119,15 +119,15 @@ class DefaultController extends Controller
      */
     public function galleryNewAction()
     {
-        if (isset($_POST['diapo']) && $_POST['diapo'] && $_POST['diapo'] !=='0' ){
-            $newrepo=$_POST['diapo'];
-            $sourcepath = './uploads/images/'. $newrepo;
-            $targetpath = './thumbs/gallerie/'. $newrepo;
-            mkdir($targetpath , 0755, TRUE);
-            if ($dh= opendir($sourcepath)){
-                while (($file = readdir($dh)) !== FALSE){
-                    if ($file != '.' && $file != '..' && is_file($sourcepath.'/'.$file))
-                        $this->darkroom($sourcepath.'/'.$file,$targetpath.'/'.$file,0 , 1050 );
+        if (isset($_POST['diapo']) && $_POST['diapo'] && $_POST['diapo'] !== '0') {
+            $newrepo = $_POST['diapo'];
+            $sourcepath = './uploads/images/' . $newrepo;
+            $targetpath = './thumbs/gallerie/' . $newrepo;
+            mkdir($targetpath, 0755, TRUE);
+            if ($dh = opendir($sourcepath)) {
+                while (($file = readdir($dh)) !== FALSE) {
+                    if ($file != '.' && $file != '..' && is_file($sourcepath . '/' . $file))
+                        $this->darkroom($sourcepath . '/' . $file, $targetpath . '/' . $file, 0, 1050);
                 }
                 closedir($dh);
             }
@@ -206,8 +206,9 @@ class DefaultController extends Controller
         ));
     }
 
-    private function darkroom($img, $to, $width = 0, $height = 0, $useGD = TRUE){
-        $diapoWidth=1680;
+    private function darkroom($img, $to, $width = 0, $height = 0, $useGD = TRUE)
+    {
+        $diapoWidth = 1680;
         $dimensions = getimagesize($img);
         $ratio = $dimensions[0] / $dimensions[1];
         // Calcul des dimensions si 0 passé en paramètre
@@ -240,8 +241,8 @@ class DefaultController extends Controller
         // Création de l'image avec la librairie GD
         if ($useGD) {
             $pattern = imagecreatetruecolor($diapoWidth, $height);
-            $background_color = imagecolorallocate ($pattern, 30, 40, 50);
-            imagefill($pattern,0,0,$background_color); //0,0 représentant le point de départ du remplissage : origine de l'image : en haut à gauche.
+            $background_color = imagecolorallocate($pattern, 30, 40, 50);
+            imagefill($pattern, 0, 0, $background_color); //0,0 représentant le point de départ du remplissage : origine de l'image : en haut à gauche.
 
             $type = mime_content_type($img);
             switch (substr($type, 6)) {
@@ -257,9 +258,9 @@ class DefaultController extends Controller
             }
 
             if ($width < $diapoWidth) {
-                $decal=($diapoWidth-$width) /2;
-            }else{
-                $decal=0;
+                $decal = ($diapoWidth - $width) / 2;
+            } else {
+                $decal = 0;
             }
             imagecopyresampled($pattern, $image, $decal, 0, 0, 0, $dimX, $dimY, $dimensions[0], $dimensions[1]);
             imagedestroy($image);
