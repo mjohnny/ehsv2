@@ -14,12 +14,12 @@ use FOS\UserBundle\Event\GetResponseUserEvent;
 use FOS\UserBundle\Form\Factory\FactoryInterface;
 use FOS\UserBundle\FOSUserEvents;
 use FOS\UserBundle\Model\UserManagerInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\Request;
 use FOS\UserBundle\Event\FormEvent;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use FOS\UserBundle\Model\UserInterface;
-use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
 /**
  * Class RegistrationController
@@ -28,6 +28,7 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInt
  */
 class RegistrationController extends BaseController
 {
+
     /**
      * @var EventDispatcherInterface
      */
@@ -45,19 +46,29 @@ class RegistrationController extends BaseController
 
     /**
      * RegistrationController constructor.
-     * @param EventDispatcherInterface $eventDispatcher
-     * @param UserManagerInterface $userManager
-     * @param TokenStorageInterface $tokenStorage
+     *
+     * @param \Symfony\Component\EventDispatcher\EventDispatcherInterface $eventDispatcher
+     * @param \FOS\UserBundle\Model\UserManagerInterface $userManager
+     * @param \Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface $tokenStorage
      */
-    public function __construct(EventDispatcherInterface $eventDispatcher, UserManagerInterface $userManager, TokenStorageInterface $tokenStorage)
-    {
-        /** @var FactoryInterface $formFactory */
-        $formFactory = $this->container->get('fos_user.registration.form.factory');
-        $this->eventDispatcher = $eventDispatcher;
+    public function __construct(
+      \Symfony\Component\EventDispatcher\EventDispatcherInterface $eventDispatcher,
+      \FOS\UserBundle\Model\UserManagerInterface $userManager,
+      \Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface $tokenStorage,
+      ContainerInterface $container
+    ) {
+        $formFactory = $container->get('fos_user.registration.form.factory');
         $this->formFactory = $formFactory;
         $this->userManager = $userManager;
-        parent::__construct($eventDispatcher, $formFactory, $userManager, $tokenStorage);
+        $this->eventDispatcher = $eventDispatcher;
+        parent::__construct(
+          $eventDispatcher,
+          $formFactory,
+          $userManager,
+          $tokenStorage
+        );
     }
+
 
     public function registerAction(Request $request)
     {
@@ -66,7 +77,10 @@ class RegistrationController extends BaseController
         $user->setEnabled(true);
 
         $event = new GetResponseUserEvent($user, $request);
-        $this->eventDispatcher->dispatch(FOSUserEvents::REGISTRATION_INITIALIZE, $event);
+        $this->eventDispatcher->dispatch(
+          FOSUserEvents::REGISTRATION_INITIALIZE,
+          $event
+        );
 
         if (null !== $event->getResponse()) {
             return $event->getResponse();
@@ -78,33 +92,51 @@ class RegistrationController extends BaseController
         $form->handleRequest($request);
 
         if ($form->isSubmitted()) {
+            $user->setUsername($user->getEmail());
             if ($form->isValid()) {
                 $event = new FormEvent($form, $request);
-                $this->eventDispatcher->dispatch(FOSUserEvents::REGISTRATION_SUCCESS, $event);
+                $this->eventDispatcher->dispatch(
+                  FOSUserEvents::REGISTRATION_SUCCESS,
+                  $event
+                );
+
+                $password = new \DateTime();
+                $user->setPlainPassword($password->getTimestamp());
 
                 $this->userManager->updateUser($user);
 
                 if (null === $response = $event->getResponse()) {
-                    $url = $this->generateUrl('fos_user_registration_confirmed');
+                    $url = $this->generateUrl(
+                      'fos_user_registration_confirmed'
+                    );
                     $response = new RedirectResponse($url);
                 }
 
-                $this->eventDispatcher->dispatch(FOSUserEvents::REGISTRATION_COMPLETED, new FilterUserResponseEvent($user, $request, $response));
+                $this->eventDispatcher->dispatch(
+                  FOSUserEvents::REGISTRATION_COMPLETED,
+                  new FilterUserResponseEvent($user, $request, $response)
+                );
 
                 return $response;
             }
 
             $event = new FormEvent($form, $request);
-            $this->eventDispatcher->dispatch(FOSUserEvents::REGISTRATION_FAILURE, $event);
+            $this->eventDispatcher->dispatch(
+              FOSUserEvents::REGISTRATION_FAILURE,
+              $event
+            );
 
             if (null !== $response = $event->getResponse()) {
                 return $response;
             }
         }
 
-        return $this->render('@FOSUser/Registration/register.html.twig', array(
+        return $this->render(
+          '@FOSUser/Registration/register.html.twig',
+          [
             'form' => $form->createView(),
-        ));
+          ]
+        );
     }
 
 }
