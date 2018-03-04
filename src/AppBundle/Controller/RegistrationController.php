@@ -20,6 +20,7 @@ use Symfony\Component\HttpFoundation\Request;
 use FOS\UserBundle\Event\FormEvent;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use FOS\UserBundle\Model\UserInterface;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
 /**
  * Class RegistrationController
@@ -50,11 +51,12 @@ class RegistrationController extends BaseController
      * @param \Symfony\Component\EventDispatcher\EventDispatcherInterface $eventDispatcher
      * @param \FOS\UserBundle\Model\UserManagerInterface $userManager
      * @param \Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface $tokenStorage
+     * @param \Symfony\Component\DependencyInjection\ContainerInterface $container
      */
     public function __construct(
-      \Symfony\Component\EventDispatcher\EventDispatcherInterface $eventDispatcher,
-      \FOS\UserBundle\Model\UserManagerInterface $userManager,
-      \Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface $tokenStorage,
+      EventDispatcherInterface $eventDispatcher,
+      UserManagerInterface $userManager,
+      TokenStorageInterface $tokenStorage,
       ContainerInterface $container
     ) {
         $formFactory = $container->get('fos_user.registration.form.factory');
