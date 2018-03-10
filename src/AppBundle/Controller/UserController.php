@@ -86,14 +86,13 @@ class UserController extends Controller
               ['token' => $user->getConfirmationToken()],
               UrlGeneratorInterface::ABSOLUTE_URL
             );
-            $context = array(
+            $context = [
               'user' => $user,
               'confirmationUrl' => $url,
-            );
+            ];
             $sendFrom = [$this->getParameter('mailer_user') => $this->getParameter('site')];
             $template = '@FOSUser/Registration/registrationEmail.html.twig';
             $this->mailerService->sendMessage($template, $context,$sendFrom, (string) $user->getEmail() );
-//            $this->get('fos_user.mailer')->sendResettingEmailMessage($user);
             $user->setPasswordRequestedAt($now);
         }
 

@@ -15,10 +15,10 @@ namespace AppBundle\Services;
  */
 class EhsSendMailService {
 
-  /** @var \Swift_Mailer  */
+  /** @var \Swift_Mailer $mailer */
   private $mailer;
 
-  /** @var \Twig_Environment  */
+  /** @var \Twig_Environment $twig */
   private $twig;
 
   /**

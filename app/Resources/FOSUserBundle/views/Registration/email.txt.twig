@@ -12,5 +12,5 @@
 {% endblock %}
 {% block body_html %}Bonjour, votre inscription a bien été enregistrée.
 Après réception du règlement, vous recevrez un nouvel e-mail vous invitant à initialiser votre mot de passe.
-<div style="width: 200px"><img src="{{ app.request.schemeAndHttpHost~ asset('ehs/images/ehs.png') }}" alt="logo ehs"></div>
+<div style="width: 200px"><img src="{{ absolute_url(asset('ehs/images/ehs.png')) }}" alt="logo ehs"></div>
 {% endblock %}
