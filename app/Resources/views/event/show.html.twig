@@ -14,7 +14,8 @@
                 </li>
                 {% if dispo and 'now'|date('Ymd') <= event.startDate|date('Ymd') %}
                     <li>
-                        <a href="{{ path('event_eventinscription_new', {'id': event.id}) }}" class="button special">{{ 'button.event register'|trans }}</a>
+                        <a href="{{ path('event_eventinscription_new', {'id': event.id}) }}"
+                           class="button special">{{ 'button.event register'|trans }}</a>
                     </li>
                 {% endif %}
                 {% if event.article %}
@@ -34,22 +35,22 @@
                 <li>
                     <a href="https://twitter.com/share" class="twitter-share-button" data-size="large">Tweet</a>
                     <script>!function (d, s, id) {
-                            var js, fjs = d.getElementsByTagName(s)[0],
-                                p = /^http:/.test(d.location) ? 'http' : 'https';
-                            if (!d.getElementById(id)) {
-                                js = d.createElement(s);
-                                js.id = id;
-                                js.src = p + '://platform.twitter.com/widgets.js';
-                                fjs.parentNode.insertBefore(js, fjs);
-                            }
-                        }(document, 'script', 'twitter-wjs');</script>
+                        var js, fjs = d.getElementsByTagName(s)[0],
+                          p = /^http:/.test(d.location) ? 'http' : 'https';
+                        if (!d.getElementById(id)) {
+                          js = d.createElement(s);
+                          js.id = id;
+                          js.src = p + '://platform.twitter.com/widgets.js';
+                          fjs.parentNode.insertBefore(js, fjs);
+                        }
+                      }(document, 'script', 'twitter-wjs');</script>
                 </li>
             </ul>
 
             {% if 'now'|date('Ymd') <= event.startDate|date('Ymd') and not dispo %}
-            <div class="bg-info">
-                <span>{{ 'event.no more place'|trans }}</span>
-            </div>
+                <div class="bg-info">
+                    <span>{{ 'event.no more place'|trans }}</span>
+                </div>
             {% endif %}
 
             <p>{{ event.presentation|raw }}</p>
@@ -64,9 +65,8 @@
                 </li>
                 {% if dispo and 'now'|date('Ymd') <= event.startDate|date('Ymd') %}
                     <li>
-                        <button type="button" class="button special" data-toggle="modal" data-target="#newInscription">
-                            {{ 'button.event register'|trans }}
-                        </button>
+                        <a href="{{ path('event_eventinscription_new', {'id': event.id}) }}"
+                           class="button special">{{ 'button.event register'|trans }}</a>
                     </li>
                 {% endif %}
                 {% if event.article %}
@@ -86,27 +86,27 @@
                 <li>
                     <a href="https://twitter.com/share" class="twitter-share-button" data-size="large">Tweet</a>
                     <script>!function (d, s, id) {
-                            var js, fjs = d.getElementsByTagName(s)[0],
-                                p = /^http:/.test(d.location) ? 'http' : 'https';
-                            if (!d.getElementById(id)) {
-                                js = d.createElement(s);
-                                js.id = id;
-                                js.src = p + '://platform.twitter.com/widgets.js';
-                                fjs.parentNode.insertBefore(js, fjs);
-                            }
-                        }(document, 'script', 'twitter-wjs');</script>
+                        var js, fjs = d.getElementsByTagName(s)[0],
+                          p = /^http:/.test(d.location) ? 'http' : 'https';
+                        if (!d.getElementById(id)) {
+                          js = d.createElement(s);
+                          js.id = id;
+                          js.src = p + '://platform.twitter.com/widgets.js';
+                          fjs.parentNode.insertBefore(js, fjs);
+                        }
+                      }(document, 'script', 'twitter-wjs');</script>
                 </li>
             </ul>
         </div>
         <div id="fb-root"></div>
         <script>(function (d, s, id) {
-                var js, fjs = d.getElementsByTagName(s)[0];
-                if (d.getElementById(id)) return;
-                js = d.createElement(s);
-                js.id = id;
-                js.src = 'https://connect.facebook.net/fr_FR/sdk.js#xfbml=1&version=v2.12';
-                fjs.parentNode.insertBefore(js, fjs);
-            }(document, 'script', 'facebook-jssdk'));
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s);
+            js.id = id;
+            js.src = 'https://connect.facebook.net/fr_FR/sdk.js#xfbml=1&version=v2.12';
+            fjs.parentNode.insertBefore(js, fjs);
+          }(document, 'script', 'facebook-jssdk'));
         </script>
     </section>
 {% endblock %}

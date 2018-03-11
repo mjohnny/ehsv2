@@ -81,6 +81,10 @@ fos_user:
         form:
             type: AppBundle\Form\RegistrationType
             validation_groups: [Default, ehsRegistration]
+    profile:
+        form:
+            type: AppBundle\Form\RegistrationType
+
     from_email:
         address: '%mailer_user%'
         sender_name: '%site%'

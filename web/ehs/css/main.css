@@ -1503,14 +1503,16 @@ textarea {
 
 input[type="checkbox"],
 input[type="radio"] {
-  -moz-appearance: checkbox;
-  -webkit-appearance: checkbox;
-  -ms-appearance: checkbox;
-  appearance: checkbox;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  -ms-appearance: none;
+  appearance: none;
   display: block;
-  width: 2em;
-  height: 2em;
-  margin-bottom: 3px; }
+  float: left;
+  margin-right: -2em;
+  opacity: 0;
+  width: 1em;
+  z-index: -1; }
   input[type="checkbox"] + label,
   input[type="radio"] + label {
     text-decoration: none;
@@ -1568,9 +1570,9 @@ input[type="radio"] + label:before {
 .formerize-placeholder {
   opacity: 1.0; }
 
-.event-inscription {
+.ehs-form {
   margin-top: 10px; }
-  .event-inscription label {
+  .ehs-form label {
     margin: 15px 0 0 2px; }
 
 label {

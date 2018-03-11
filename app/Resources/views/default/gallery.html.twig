@@ -1,25 +1,6 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    {#{% if is_granted('ROLE_ADMIN') %}#}
-        {#<section class="wrapper style2 special">#}
-            {#<div class="inner">#}
-                {#<form action="{{ path('new_gallery') }}" method="post" name="creatediapo">#}
-                    {#<label for="diapo">Créer un diaporama</label>#}
-                    {#<select name="diapo" id="diapo" style="color: #888888">#}
-                        {#<option value=0 >nom du dossier</option>#}
-                        {#{% if dossiers['forcreate'] is defined %}#}
-                            {#{% for key,dossier in dossiers['forcreate']  %}#}
-                                {#<option value="{{ dossier }}">{{ dossier }}</option>#}
-                            {#{% endfor %}#}
-                        {#{% endif %}#}
-                    {#</select>#}
-                    {#<input type="submit" value="créer le diaporama">#}
-                {#</form>#}
-            {#</div>#}
-        {#</section>#}
-    {#{% endif %}#}
-
     <section id="four" class="wrapper style1 special">
         <div class="inner">
             {% for key, value in fichiers %}

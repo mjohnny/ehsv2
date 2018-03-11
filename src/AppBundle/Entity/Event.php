@@ -67,7 +67,7 @@ class Event
     /**
      * inscriptions event
      *
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\EventInscription", mappedBy="event")
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\EventInscription", mappedBy="event", cascade={"remove"})
      */
     private $inscriptions;
 

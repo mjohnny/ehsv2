@@ -88,7 +88,17 @@ header:
         asso present: L'association
         event: événements
         article: documentations
-        admin: Gestion du site
+        authenticate: s'authentifier
+        profile: profil
+        logout: se déconnecter
+        admin: gestion du site
+        tag:
+            culture: culture
+            ethics: éthique
+            health: santé
+            sport: sport
+            work: travail
+            accessibility: accessibilité
 button:
     join us: nous rejoindre
     learn more: nous connaître
