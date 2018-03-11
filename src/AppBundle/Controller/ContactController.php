@@ -12,9 +12,10 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
- * Contact controller.
+ * Class ContactController.
  *
  * @Route("contact")
+ * @package AppBundle\Controller
  */
 class ContactController extends Controller
 {
@@ -113,6 +114,10 @@ class ContactController extends Controller
      *
      * @Route("/{id}", name="contact_show")
      * @Method("GET")
+     *
+     * @param \AppBundle\Entity\Contact $contact
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function showAction(Contact $contact)
     {
@@ -135,11 +140,7 @@ class ContactController extends Controller
      * @param \AppBundle\Entity\Contact $contact
      *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
-     * @throws \Exception
-     * @throws \Throwable
-     * @throws \Twig_Error_Loader
-     * @throws \Twig_Error_Runtime
-     * @throws \Twig_Error_Syntax
+     * {@inheritdoc}
      */
     public function answerAction(Contact $contact)
     {

@@ -6,10 +6,12 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * EventInscription
+ * Class EventInscription
  *
  * @ORM\Table(name="event_inscription")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\EventInscriptionRepository")
+ *
+ * @package AppBundle\Entity
  */
 class EventInscription
 {
@@ -78,6 +80,14 @@ class EventInscription
      * @ORM\JoinColumn(name="event_id", referencedColumnName="id")
      */
     private $event;
+
+    /**
+     * EventInscription constructor.
+     */
+    public function __construct()
+    {
+        $this->validated = false;
+    }
 
 
     /**

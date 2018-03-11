@@ -9,10 +9,19 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
+/**
+ * Class DefaultController
+ *
+ * @package AppBundle\Controller
+ */
 class DefaultController extends Controller
 {
+
     /**
+     * Display homepage.
+     *
      * @Route("/", name="homepage")
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function indexAction()
     {
@@ -22,7 +31,6 @@ class DefaultController extends Controller
         $contact = new Contact();
         $formContact = $this->createForm('AppBundle\Form\ContactType', $contact,
             array('action' => $this->generateUrl('contact_new')));
-//        $formContact->handleRequest($this->get('request_stack')->getCurrentRequest());
 
         $newsletterReceiver = new NewsletterReceiver();
         $formNewsletter = $this->createForm('AppBundle\Form\NewsletterReceiverType', $newsletterReceiver,
@@ -61,10 +69,12 @@ class DefaultController extends Controller
     }
 
     /**
-     * association Infos légales
+     * Association legal info.
      *
      * @Route("/infoslegales", name="index_cgu")
      * @Method("GET")
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function cguAction()
     {
@@ -73,10 +83,12 @@ class DefaultController extends Controller
     }
 
     /**
-     * Show Gallery
+     * Show Gallery.
      *
      * @Route("/gallery", name="index_gallery")
      * @Method("GET")
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function galleryAction()
     {
@@ -164,13 +176,16 @@ class DefaultController extends Controller
     }
 
     /**
-     * Show diapo
+     * Show diapo.
      *
      * @Route("/gallery/{diapo}", name="diapo_gallery")
      * @Method("GET")
+     *
+     * @param $diapo
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
      */
-    public
-    function diapoAction($diapo)
+    public function diapoAction($diapo)
     {
         return $this->render('default/diapo.html.twig', array(
             'dir' => $diapo
@@ -178,13 +193,15 @@ class DefaultController extends Controller
     }
 
     /**
-     * @param $diapo
+     * Show gallery.
+     *
      * @Route("/gallery/{diapo}/show", name="show_diapo")
      * @Method("GET")
+     * @param $diapo
      *
+     * @return \Symfony\Component\HttpFoundation\Response
      */
-    public
-    function showdiapoAction($diapo)
+    public function showdiapoAction($diapo)
     {
         # Nom du dossier images à renseigner
         $path = './thumbs/gallerie/' . $diapo . '/';
@@ -206,6 +223,15 @@ class DefaultController extends Controller
         ));
     }
 
+    /**
+     * @param $img
+     * @param $to
+     * @param int $width
+     * @param int $height
+     * @param bool $useGD
+     *
+     * @return bool
+     */
     private function darkroom($img, $to, $width = 0, $height = 0, $useGD = TRUE)
     {
         $diapoWidth = 1680;

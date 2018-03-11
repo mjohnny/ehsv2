@@ -11,9 +11,10 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 /**
- * User controller.
+ * Class UserController.
  *
  * @Route("user")
+ * @package AppBundle\Controller
  */
 class UserController extends Controller
 {
@@ -39,6 +40,8 @@ class UserController extends Controller
      *
      * @Route("/", name="user_index")
      * @Method("GET")
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function indexAction()
     {
@@ -120,6 +123,10 @@ class UserController extends Controller
      *
      * @Route("/{id}", name="user_show")
      * @Method("GET")
+     *
+     * @param \AppBundle\Entity\User $user
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function showAction(User $user)
     {

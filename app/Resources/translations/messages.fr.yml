@@ -49,6 +49,7 @@ Program: Programme
 EventInscription: liste des inscrits
 Validated: Valider
 Mobility: PMR
+Mobility_full: Personne à mobilité réduite
 Add info: Information complémentaire
 
 Article: Documentation
@@ -106,6 +107,7 @@ event:
     no more place: Nous sommes désolés, il n'y a plus de place disponible pour cet événement.
     inscription ok: Votre inscription a bien été enregistrée.
     program: programme de la journée
+    Register event: Inscription à l'événement
 
 diapo:
     show : voir le diaporama

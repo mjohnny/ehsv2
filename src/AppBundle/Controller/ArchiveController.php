@@ -8,17 +8,21 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 
 /**
- * Archive controller.
+ * Class ArchiveController.
  *
  * @Route("archive")
+ * @package AppBundle\Controller
  */
 class ArchiveController extends Controller
 {
+
     /**
      * Lists all archive entities.
      *
      * @Route("/", name="archive_index")
      * @Method("GET")
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function indexAction()
     {
@@ -32,8 +36,12 @@ class ArchiveController extends Controller
     }
 
     /**
+     * Display presentation of the association.
+     *
      * @Route("/association", name="present_asso")
      * @Method("GET")
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function assoAction()
     {
@@ -46,6 +54,10 @@ class ArchiveController extends Controller
      *
      * @Route("/{id}", name="archive_show")
      * @Method("GET")
+     *
+     * @param \AppBundle\Entity\Archive $archive
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function showAction(Archive $archive)
     {

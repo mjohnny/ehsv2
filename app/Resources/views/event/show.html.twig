@@ -14,9 +14,7 @@
                 </li>
                 {% if dispo and 'now'|date('Ymd') <= event.startDate|date('Ymd') %}
                     <li>
-                        <button type="button" class="button special" data-toggle="modal" data-target="#newInscription">
-                            {{ 'button.event register'|trans }}
-                        </button>
+                        <a href="{{ path('event_eventinscription_new', {'id': event.id}) }}" class="button special">{{ 'button.event register'|trans }}</a>
                     </li>
                 {% endif %}
                 {% if event.article %}
@@ -47,35 +45,12 @@
                         }(document, 'script', 'twitter-wjs');</script>
                 </li>
             </ul>
-            {#{% if not dispo %}#}
+
+            {% if 'now'|date('Ymd') <= event.startDate|date('Ymd') and not dispo %}
             <div class="bg-info">
                 <span>{{ 'event.no more place'|trans }}</span>
             </div>
-            {#{% endif %}#}
-
-            <!-- Button trigger modal -->
-            <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
-                Launch demo modal
-            </button>
-
-            <!-- Modal -->
-            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-                <div class="modal-dialog modal-lg" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                            <h4 class="modal-title" id="myModalLabel">Modal title</h4>
-                        </div>
-                        <div class="modal-body">
-                            ...
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary">Save changes</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            {% endif %}
 
             <p>{{ event.presentation|raw }}</p>
 

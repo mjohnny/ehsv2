@@ -10,17 +10,21 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
- * Article controller.
+ * Class ArticleController.
  *
  * @Route("article")
+ * @package AppBundle\Controller
  */
 class ArticleController extends Controller
 {
+
     /**
      * Lists all article entities.
      *
      * @Route("/", name="article_index")
      * @Method("GET")
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function indexAction()
     {
@@ -38,6 +42,11 @@ class ArticleController extends Controller
      *
      * @Route("/{id}", name="article_show")
      * @Method("GET")
+     *
+     * @param \Symfony\Component\HttpFoundation\Request $request
+     * @param \AppBundle\Entity\Article $article
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function showAction(Request $request, Article $article)
     {
@@ -57,6 +66,10 @@ class ArticleController extends Controller
      *
      * @Route("/tag/{id}", name="article_taged")
      * @Method("GET"))
+     *
+     * @param \AppBundle\Entity\Tag $tag
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function tagAction(Tag $tag)
     {

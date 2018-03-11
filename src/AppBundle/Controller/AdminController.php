@@ -10,18 +10,27 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\Article;
 use AppBundle\Entity\Event;
+use AppBundle\Entity\EventInscription;
 use AppBundle\Entity\Program;
+use AppBundle\Services\EhsSendMailService;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AdminController as BaseAdminController;
 use EasyCorp\Bundle\EasyAdminBundle\Event\EasyAdminEvents;
 
 class AdminController extends BaseAdminController
 {
+
+    /**
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
     public function answerAction()
     {
         $contact = $this->em->getRepository('AppBundle:Contact')->find($this->request->get('id'));
         return $this->render('easy_admin/contact/contactAnswer.html.twig', array('contact' => $contact));
     }
 
+    /**
+     * @param \AppBundle\Entity\Event $event
+     */
     public function prePersistEventEntity(Event $event)
     {
        $program = new Program();
@@ -29,6 +38,9 @@ class AdminController extends BaseAdminController
        parent::prePersistEntity($event);
     }
 
+    /**
+     * @param object $entity
+     */
     public function preUpdateEntity($entity)
     {
         if ($entity instanceof Article) $entity->setCreateDate(new \DateTime());
@@ -38,16 +50,20 @@ class AdminController extends BaseAdminController
         parent::prePersistEntity($entity);
     }
 
+    /**
+     * @param object $entity
+     */
     public function prePersistEntity($entity)
     {
         if (method_exists($entity, 'setUser')) $entity->setUser($this->getUser());
         parent::prePersistEntity($entity);
     }
 
+    /**
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
     public function listRegisteredAction()
     {
-//        $event = $this->em->getRepository('AppBundle:Event')->find($this->request->get('id'));
-//        return $this->render('easy_admin/event/eventRegisteredList.html.twig', array('registeredList' => $event->getInscriptions()));
         return $this->redirectToRoute('easyadmin', array(
             'action' => 'list',
             'entity' => 'EventInscription',
@@ -72,29 +88,21 @@ class AdminController extends BaseAdminController
             'delete_form_template' => $this->createDeleteForm($this->entity['name'], '__id__')->createView(),
         ));
     }
-    public function preUpdateEventInscriptionEntity($entity)
+
+    /**
+     * @param \AppBundle\Entity\EventInscription $entity
+     *{@inheritdoc}
+     */
+    public function preUpdateEventInscriptionEntity(EventInscription $entity)
     {
         $validated = $this->request->query->get('property');
         $newValue = $this->request->query->get('newValue');
         if ( (isset($validated) && $validated === 'validated' ) && (isset($newValue) && $newValue === 'true') ){
-            $this->sendContactMail();
+            $send_mail_service = $this->get('AppBundle\Services\EhsSendMailService');
+            $send_from = [$this->getParameter('mailer_user') => $this->getParameter('site')];
+            $send_mail_service->sendMessage('eventinscription/validatedMail.html.twig', ['eventinscription' => $entity], $send_from, $entity->getEmail());
         }
         parent::preUpdateEntity($entity);
     }
 
-    private function sendContactMail()
-    {
-        $message = \Swift_Message::newInstance()
-            ->setSubject('coucou')
-            ->setFrom('test@test.fr')
-            ->setTo(array('receipe@test.fr'))
-            ->setBody(
-                $this->renderView(
-                    'event/registrationValidated.html.twig'),
-                'text/html'
-                )
-        ;
-        $this->get('mailer')->send($message);
-
-    }
 }
