@@ -260,4 +260,11 @@ input[type="radio"] {
   }
 }
 
+.form-newsletter {
+  margin-top: 5rem !important;
+  .major {
+    margin-bottom: 2rem;
+  }
+}
+
 @include color-form;

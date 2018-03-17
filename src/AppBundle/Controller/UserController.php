@@ -2,7 +2,6 @@
 
 namespace AppBundle\Controller;
 
-use AppBundle\Entity\User;
 use AppBundle\Services\EhsSendMailService;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -32,29 +31,6 @@ class UserController extends Controller
     public function __construct(EhsSendMailService $mailService)
     {
         $this->mailerService = $mailService;
-    }
-
-
-    /**
-     * Lists all user entities.
-     *
-     * @Route("/", name="user_index")
-     * @Method("GET")
-     *
-     * @return \Symfony\Component\HttpFoundation\Response
-     */
-    public function indexAction()
-    {
-        $em = $this->getDoctrine()->getManager();
-
-        $users = $em->getRepository('AppBundle:User')->findAll();
-
-        return $this->render(
-          'user/index.html.twig',
-          [
-            'users' => $users,
-          ]
-        );
     }
 
     /**
@@ -114,27 +90,6 @@ class UserController extends Controller
           [
             'action' => 'list',
             'entity' => $request->query->get('entity'),
-          ]
-        );
-    }
-
-    /**
-     * Finds and displays a user entity.
-     *
-     * @Route("/{id}", name="user_show")
-     * @Method("GET")
-     *
-     * @param \AppBundle\Entity\User $user
-     *
-     * @return \Symfony\Component\HttpFoundation\Response
-     */
-    public function showAction(User $user)
-    {
-
-        return $this->render(
-          'user/show.html.twig',
-          [
-            'user' => $user,
           ]
         );
     }

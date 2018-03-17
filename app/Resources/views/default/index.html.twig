@@ -124,7 +124,7 @@
             <div>
             </div>
         </div>
-        <div class="inner">
+        <div class="inner form-newsletter">
             <header class="major narrow">
                 <p>{{ 'site.receive newsletter'|trans }}</p>
             </header>
@@ -132,7 +132,7 @@
             <div class="container 75%">
                 <div class="row uniform 50%">
                     <div class="12u$">
-                        {{ form_widget(formNewsletter.email) }}
+                        {{ form_widget(formNewsletter) }}
                     </div>
                 </div>
             </div>
@@ -140,6 +140,7 @@
                 <li><input type="submit" class="special" value="{{ 'form.send'|trans }}"/></li>
             </ul>
             {{ form_end(formNewsletter) }}
+            <a href="{{ path('newsletter_stop') }}">{{ 'site.stop newsletter'|trans }}</a>
         </div>
     </section>
 {% endblock %}

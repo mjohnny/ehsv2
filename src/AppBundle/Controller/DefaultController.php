@@ -4,6 +4,7 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\Contact;
 use AppBundle\Entity\NewsletterReceiver;
+use AppBundle\Form\NewsletterReceiverType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -33,7 +34,7 @@ class DefaultController extends Controller
             array('action' => $this->generateUrl('contact_new')));
 
         $newsletterReceiver = new NewsletterReceiver();
-        $formNewsletter = $this->createForm('AppBundle\Form\NewsletterReceiverType', $newsletterReceiver,
+        $formNewsletter = $this->createForm(NewsletterReceiverType::class, $newsletterReceiver,
             array('action' => $this->generateUrl('newsletterreceiver_new')));
 
         /*******  images  ***********/

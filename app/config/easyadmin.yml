@@ -20,6 +20,7 @@ easy_admin:
             - { entity: 'Archive', icon: 'archive' }
             - { entity: 'Contact', icon: 'envelope-o' }
             - { label: 'menu.gallery', route: 'gallery_new', icon: 'camera' }
+            - { label: 'menu.newsletter', url: 'https://login.mailchimp.com/', icon: 'paperclip' }
     list:
         max_results: 100
 

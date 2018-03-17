@@ -8,6 +8,7 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Services\EhsNewsletterService;
 use FOS\UserBundle\Controller\RegistrationController as BaseController;
 use FOS\UserBundle\Event\FilterUserResponseEvent;
 use FOS\UserBundle\Event\GetResponseUserEvent;
@@ -46,23 +47,31 @@ class RegistrationController extends BaseController
     private $userManager;
 
     /**
+     * @var \AppBundle\Services\EhsNewsletterService
+     */
+    private $newsletterService;
+
+    /**
      * RegistrationController constructor.
      *
      * @param \Symfony\Component\EventDispatcher\EventDispatcherInterface $eventDispatcher
      * @param \FOS\UserBundle\Model\UserManagerInterface $userManager
      * @param \Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface $tokenStorage
      * @param \Symfony\Component\DependencyInjection\ContainerInterface $container
+     * @param \AppBundle\Services\EhsNewsletterService $newsletterService
      */
     public function __construct(
       EventDispatcherInterface $eventDispatcher,
       UserManagerInterface $userManager,
       TokenStorageInterface $tokenStorage,
-      ContainerInterface $container
+      ContainerInterface $container,
+      EhsNewsletterService $newsletterService
     ) {
         $formFactory = $container->get('fos_user.registration.form.factory');
         $this->formFactory = $formFactory;
         $this->userManager = $userManager;
         $this->eventDispatcher = $eventDispatcher;
+        $this->newsletterService = $newsletterService;
         parent::__construct(
           $eventDispatcher,
           $formFactory,
@@ -106,6 +115,13 @@ class RegistrationController extends BaseController
                 $user->setPlainPassword($password->getTimestamp());
 
                 $this->userManager->updateUser($user);
+
+                if ($user->isNewsletter()) {
+                    $this->newsletterService->addNewReceiver(
+                      $user->getEmail(),
+                      true
+                    );
+                }
 
                 if (null === $response = $event->getResponse()) {
                     $url = $this->generateUrl(

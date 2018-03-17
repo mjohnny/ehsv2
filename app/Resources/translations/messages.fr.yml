@@ -3,6 +3,7 @@ menu:
     user: Adhérants
     contact: Gestion des contacts
     gallery: Gestion des galleries
+    newsletter: NewsLetter
 
 action:
     validated: Valider
@@ -81,6 +82,7 @@ site:
     subname: mieux vivre ensemble
     stay in touch: restons en contact
     receive newsletter: s'inscrire à la newsletter
+    stop newsletter: Se désinscrire de la newsletter
     published at: document publié le
 header:
     menu:

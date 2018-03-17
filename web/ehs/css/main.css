@@ -1575,6 +1575,11 @@ input[type="radio"] + label:before {
   .ehs-form label {
     margin: 15px 0 0 2px; }
 
+.form-newsletter {
+  margin-top: 5rem !important; }
+  .form-newsletter .major {
+    margin-bottom: 2rem; }
+
 label {
   color: #25383B; }
 
