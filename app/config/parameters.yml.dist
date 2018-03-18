@@ -16,6 +16,7 @@ parameters:
     mailer_contact: null
     mailer_password: ~
     mailchimp_api: ~
+    mailchimp_list_id: ~
 
     # A secret key that's used to generate certain security-related tokens
     secret: ThisTokenIsNotSoSecretChangeIt

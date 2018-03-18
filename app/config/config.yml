@@ -38,7 +38,7 @@ twig:
     debug: '%kernel.debug%'
     strict_variables: '%kernel.debug%'
     paths:
-        '%kernel.project_dir%/vendor/javiereguiluz/easyadmin-bundle/src': easyadmin
+        '%kernel.project_dir%/vendor/easycorp/easyadmin-bundle/src': easyadmin
 
 # Doctrine Configuration
 doctrine:
