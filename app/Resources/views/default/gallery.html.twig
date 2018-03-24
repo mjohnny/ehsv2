@@ -1,14 +1,11 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
+    {% set feature = ['feature left', 'feature right'] %}
     <section id="four" class="wrapper style1 special">
         <div class="inner">
             {% for key, value in fichiers %}
-                {% set feature= "feature left" %}
-                {% if loop.index % 2 ==0 %}
-                    {% set feature= "feature right" %}
-                {% endif %}
-                <article class="{{ feature }}">
+                <article class="{{ cycle(feature, loop.index0) }}">
                     <span class="image"><img id="image{{ loop.index }}" src="{{ asset('thumbs/gallerie/'~key~'/'~value) }}"
                                              alt="photo diapo" /></span>
                     <div class="content">

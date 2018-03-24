@@ -2,15 +2,12 @@
 
 {% block body %}
     <!-- One -->
+    {% set feature = ['feature left', 'feature right'] %}
     <section id="one" class="wrapper style1">
         <div class="inner">
             {% for event in events %}
-                {% set feature= "feature left" %}
-                {% if loop.index % 2 ==0 %}
-                    {% set feature= "feature right" %}
-                {% endif %}
-                <article class="{{ feature }}">
-                    <span class="image"><img id="image{{ loop.index }}" src="{{ asset('ehs/images/ehs.png') }}"
+                <article class="{{ cycle(feature, loop.index0) }}">
+                    <span class="image"><img id="image{{ loop.index0 }}" src="{{ asset('ehs/images/ehs.png') }}"
                                              alt="logo ehs"/></span>
                     <div class="content">
                         <h2>{{ event.title|raw }}</h2>

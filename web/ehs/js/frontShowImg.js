@@ -2,7 +2,7 @@ $('.frontShow').each(function (indexFrontShow, frontShow) {
         var img = this.querySelector('img');
         if (img) {
             img = img.getAttribute('src');
-            $('#image' + (indexFrontShow + 1)).attr('src', img);
+            $('#image' + (indexFrontShow)).attr('src', img);
         }
         var allContent = frontShow.querySelectorAll('p,H1,H2,H3,H4,H5');
         var newText = false;

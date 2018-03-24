@@ -43,7 +43,12 @@ class AdminController extends BaseAdminController
      */
     public function preUpdateEntity($entity)
     {
-        if ($entity instanceof Article) $entity->setCreateDate(new \DateTime());
+        if ($entity instanceof Article) {
+            $entity->setCreateDate(new \DateTime());
+            $content = $entity->getContent();
+            $content = preg_replace('/\.\.\//', '/', $content);
+            $entity->setContent($content);
+        }
         if (method_exists($entity, 'setUser'))  $entity->setUser($this->getUser());
         if (method_exists($entity, 'setModificationDate')) $entity->setModificationDate(new \DateTime());
 
@@ -55,6 +60,11 @@ class AdminController extends BaseAdminController
      */
     public function prePersistEntity($entity)
     {
+        if ($entity instanceof Article) {
+            $content = $entity->getContent();
+            $content = preg_replace('/\.\.\//', '/', $content);
+            $entity->setContent($content);
+        }
         if (method_exists($entity, 'setUser')) $entity->setUser($this->getUser());
         parent::prePersistEntity($entity);
     }
