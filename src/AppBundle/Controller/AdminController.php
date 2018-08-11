@@ -9,6 +9,7 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Article;
+use AppBundle\Entity\BaseEntity;
 use AppBundle\Entity\Event;
 use AppBundle\Entity\EventInscription;
 use AppBundle\Entity\Program;
@@ -20,6 +21,22 @@ class AdminController extends BaseAdminController
 {
 
     /**
+     * @var \AppBundle\Services\EhsSendMailService
+     */
+    private $EhsSendMailService;
+
+    /**
+     * AdminController constructor.
+     *
+     * @param \AppBundle\Services\EhsSendMailService $ehsSendMailService
+     */
+    public function __construct(EhsSendMailService $ehsSendMailService)
+    {
+        $this->EhsSendMailService = $ehsSendMailService;
+    }
+
+
+    /**
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function answerAction()
@@ -29,25 +46,19 @@ class AdminController extends BaseAdminController
     }
 
     /**
-     * @param \AppBundle\Entity\Event $event
-     */
-    public function prePersistEventEntity(Event $event)
-    {
-       $program = new Program();
-       $event->setProgram($program);
-       parent::prePersistEntity($event);
-    }
-
-    /**
      * @param object $entity
      */
     public function preUpdateEntity($entity)
     {
         if ($entity instanceof Article) {
-            $entity->setCreateDate(new \DateTime());
             $content = $entity->getContent();
-            $content = preg_replace('/\.\.\//', '/', $content);
+            $content = preg_replace('/(\.\.\/){1,}/', '/', $content);
             $entity->setContent($content);
+        }
+        if ($entity instanceof Event) {
+            $content = $entity->getPresentation();
+            $content = preg_replace('/(\.\.\/){1,}/', '/', $content);
+            $entity->setPresentation($content);
         }
         if (method_exists($entity, 'setUser'))  $entity->setUser($this->getUser());
         if (method_exists($entity, 'setModificationDate')) $entity->setModificationDate(new \DateTime());
@@ -60,12 +71,23 @@ class AdminController extends BaseAdminController
      */
     public function prePersistEntity($entity)
     {
+        if ($entity instanceof Event) {
+            $program = new Program();
+            $entity->setProgram($program);
+            $content = $entity->getPresentation();
+            $content = preg_replace('/(\.\.\/){1,}/', '/', $content);
+            $entity->setPresentation($content);
+        }
         if ($entity instanceof Article) {
             $content = $entity->getContent();
-            $content = preg_replace('/\.\.\//', '/', $content);
+            $content = preg_replace('/(\.\.\/){1,}/', '/', $content);
             $entity->setContent($content);
         }
+        if (method_exists($entity, 'setAliasPath'))
+            $entity->setAliasPath(BaseEntity::createAliasPath($entity->getTitle()));
+
         if (method_exists($entity, 'setUser')) $entity->setUser($this->getUser());
+
         parent::prePersistEntity($entity);
     }
 
@@ -88,7 +110,11 @@ class AdminController extends BaseAdminController
         $dql_filter = $this->entity['list']['dql_filter'];
         $dql_filter = str_replace('eventId', $this->request->query->get('eventId'), $dql_filter );
         $fields = $this->entity['list']['fields'];
-        $paginator = $this->findAll($this->entity['class'], $this->request->query->get('page', 1), $this->config['list']['max_results'], $this->request->query->get('sortField'), $this->request->query->get('sortDirection'), $dql_filter);
+        $paginator = $this->findAll($this->entity['class'],
+            $this->request->query->get('page', 1),
+            $this->config['list']['max_results'],
+            $this->request->query->get('sortField'),
+            $this->request->query->get('sortDirection'), $dql_filter);
 
         $this->dispatch(EasyAdminEvents::POST_LIST, array('paginator' => $paginator));
 
@@ -101,16 +127,17 @@ class AdminController extends BaseAdminController
 
     /**
      * @param \AppBundle\Entity\EventInscription $entity
-     *{@inheritdoc}
+     *
+     * @throws \Throwable
      */
     public function preUpdateEventInscriptionEntity(EventInscription $entity)
     {
         $validated = $this->request->query->get('property');
         $newValue = $this->request->query->get('newValue');
         if ( (isset($validated) && $validated === 'validated' ) && (isset($newValue) && $newValue === 'true') ){
-            $send_mail_service = $this->get('AppBundle\Services\EhsSendMailService');
             $send_from = [$this->getParameter('mailer_user') => $this->getParameter('site')];
-            $send_mail_service->sendMessage('eventinscription/validatedMail.html.twig', ['eventinscription' => $entity], $send_from, $entity->getEmail());
+            $this->EhsSendMailService->sendMessage('eventinscription/validatedMail.html.twig',
+                ['eventinscription' => $entity], $send_from, $entity->getEmail());
         }
         parent::preUpdateEntity($entity);
     }

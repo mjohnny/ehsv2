@@ -82,15 +82,28 @@ easy_admin:
                     - placeNumber
                     - archived
                     - inscriptions
-            form:
+            new:
                 fields:
+                    - { type: 'tab', label: 'Contenu principal', icon: 'leanpub' }
+                    - { type: 'group',label: 'event.content', css_class: 'col-md-10' }
                     - { property: 'title', type: 'text' }
                     - presentation
+                    - { type: 'group',icon: 'info-circle', css_class: 'col-md-2' }
                     - placeNumber
                     - tag
                     - startDate
             edit:
                 fields:
+                    - { type: 'tab', label: 'Contenu principal', icon: 'leanpub' }
+                    - { type: 'group',label: 'form.content', css_class: 'col-md-10' }
+                    - {property: 'aliasPath', type_options: { disabled: disabled}}
+                    - { property: 'title', type: 'text' }
+                    - presentation
+                    - { type: 'group',icon: 'info-circle', css_class: 'col-md-2' }
+                    - placeNumber
+                    - tag
+                    - startDate
+                    - { type: 'tab', label: 'Programme', icon: 'calendar' }
                     - { property: 'program', type: 'AppBundle\Form\ProgramType', type_options: { label_attr: { hidden: hidden} } }
         Article:
             class: AppBundle\Entity\Article
@@ -100,26 +113,35 @@ easy_admin:
                     - { name: 'delete', icon: 'trash', label: false }
                 fields:
                     - id
-                    - createDate
-                    - { property: 'user', label: 'create_modify_by' }
                     - title
                     - tag
                     - publicationDate
+                    - createdDate
+                    - { property: 'user', label: 'create_modify_by' }
                     - archived
-            form:
+            new:
                 fields:
-                    - { property: 'createDate', type_options: { disabled: 'disabled', widget: 'single_text', format: 'dd/MM/Y HH:mm' } }
+                    - { type: 'group',label: 'form.content', css_class: 'col-md-10' }
                     - { property: 'title', type: 'text'}
                     - { property: 'content', type_options: { required: false} }
+                    - { type: 'group',icon: 'info-circle', css_class: 'col-md-2' }
+                    - { property: 'createdDate', type_options: { disabled: 'disabled', widget: 'single_text', format: 'dd/MM/Y' } }
                     - publicationDate
                     - tag
                     - { property: 'diapofolder', type: 'AppBundle\Form\DiapoFolderType', type_options: { label_attr: { hidden: hidden} } }
-            new:
-                fields:
                     - { property: 'event', type: 'entity', class: 'AppBundle\Entity\Event',
                                             type_options: { query_builder: AppBundle\Repository\EventRepository::available }}
             edit:
                 fields:
+                    - { type: 'group',label: 'form.content', css_class: 'col-md-10' }
+                    - {property: 'aliasPath', type_options: { attr: { disabled: disabled} }}
+                    - { property: 'title', type: 'text'}
+                    - { property: 'content', type_options: { required: false} }
+                    - { type: 'group',icon: 'info-circle', css_class: 'col-md-2' }
+                    - { property: 'createdDate', type_options: { disabled: 'disabled', widget: 'single_text', format: 'dd/MM/Y' } }
+                    - publicationDate
+                    - tag
+                    - { property: 'diapofolder', type: 'AppBundle\Form\DiapoFolderType', type_options: { label_attr: { hidden: hidden} } }
                     - { property: 'event', type: 'entity', class: 'AppBundle\Entity\Event',
                                             type_options: { query_builder: AppBundle\Repository\EventRepository::available }}
 
@@ -149,15 +171,27 @@ easy_admin:
                     - { name: 'show', icon: 'eye', label: false }
                     - { name: 'edit', icon: 'pencil', label: false }
                     - { name: 'delete', icon: 'trash', label: false }
-            form:
                 fields:
+                    - id
+                    - title
+                    - modificationDate
+                    - { property: 'user', label: 'create_modify_by' }
+                    - createdDate
+            new:
+                fields:
+                    - title
+                    - comments
+            edit:
+                fields:
+                    - {property: 'aliasPath', type_options: { attr: { disabled: disabled} }}
                     - title
                     - comments
 
             show:
                 fields:
-                    - user
+                    - { property: 'user', label: 'create_modify_by' }
+                    - aliasPath
                     - title
                     - comments
-                    - createDate
+                    - createdDate
                     - modificationDate

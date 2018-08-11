@@ -4,6 +4,7 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\Article;
 use AppBundle\Entity\Tag;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -41,6 +42,7 @@ class ArticleController extends Controller
      * Finds and displays a article entity.
      *
      * @Route("/{id}", name="article_show")
+     * @ParamConverter("article", options={"mapping": {"id": "aliasPath"}})
      * @Method("GET")
      *
      * @param \Symfony\Component\HttpFoundation\Request $request
@@ -57,7 +59,7 @@ class ArticleController extends Controller
 
         return $this->render('article/show.html.twig', array(
             'article' => $article,
-            'bachUrl' => $url
+            'backUrl' => $url
         ));
     }
 

@@ -11,7 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="event")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\EventRepository")
  */
-class Event
+class Event extends BaseEntity
 {
     /**
      * @var int
@@ -21,13 +21,6 @@ class Event
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="title", type="text")
-     */
-    private $title;
 
     /**
      * @var string
@@ -91,6 +84,7 @@ class Event
      */
     public function __construct()
     {
+        parent::__construct();
         $this->inscriptions= new ArrayCollection();
         $this->archived = false;
     }
@@ -103,22 +97,6 @@ class Event
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * @return string
-     */
-    public function getTitle()
-    {
-        return $this->title;
-    }
-
-    /**
-     * @param string $title
-     */
-    public function setTitle($title)
-    {
-        $this->title = $title;
     }
 
     /**

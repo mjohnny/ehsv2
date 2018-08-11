@@ -10,7 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="archive")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\ArchiveRepository")
  */
-class Archive
+class Archive extends BaseEntity
 {
     /**
      * @var int
@@ -24,23 +24,9 @@ class Archive
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="create_date", type="datetime")
-     */
-    private $createDate;
-
-    /**
-     * @var \DateTime
-     *
      * @ORM\Column(name="modification_date", type="datetime", nullable=true)
      */
     private $modificationDate;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="title", type="string", length=255)
-     */
-    private $title;
 
     /**
      * @var string
@@ -50,24 +36,6 @@ class Archive
     private $comments;
 
     /**
-     * archive create or modify user
-     *
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User")
-     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
-     */
-    private $user;
-
-    /**
-     * Archive constructor.
-     * @param \DateTime $createDate
-     */
-    public function __construct()
-    {
-        $this->createDate = new \DateTime();
-    }
-
-
-    /**
      * Get id
      *
      * @return int
@@ -75,22 +43,6 @@ class Archive
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * @return \DateTime
-     */
-    public function getCreateDate()
-    {
-        return $this->createDate;
-    }
-
-    /**
-     * @param \DateTime $createDate
-     */
-    public function setCreateDate($createDate)
-    {
-        $this->createDate = $createDate;
     }
 
     /**
@@ -112,22 +64,6 @@ class Archive
     /**
      * @return string
      */
-    public function getTitle()
-    {
-        return $this->title;
-    }
-
-    /**
-     * @param string $title
-     */
-    public function setTitle($title)
-    {
-        $this->title = $title;
-    }
-
-    /**
-     * @return string
-     */
     public function getComments()
     {
         return $this->comments;
@@ -141,20 +77,5 @@ class Archive
         $this->comments = $comments;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getUser()
-    {
-        return $this->user;
-    }
-
-    /**
-     * @param mixed $user
-     */
-    public function setUser($user)
-    {
-        $this->user = $user;
-    }
 }
 

@@ -10,7 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="article")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\ArticleRepository")
  */
-class Article
+class Article extends BaseEntity
 {
     /**
      * @var int
@@ -20,20 +20,6 @@ class Article
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
-
-    /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="create_date", type="date")
-     */
-    private $createDate;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="title", type="text")
-     */
-    private $title;
 
     /**
      * @var string
@@ -57,14 +43,6 @@ class Article
     private $archived;
 
     /**
-     * Create article user
-     *
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User")
-     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
-     */
-    private $user;
-
-    /**
      * article tag
      *@ORM\ManyToOne(targetEntity="AppBundle\Entity\Tag")
      * @ORM\JoinColumn(name="tag_id", referencedColumnName="id", nullable=false)
@@ -84,13 +62,15 @@ class Article
      */
     private $diapofolder;
 
+    /**
+     * Article constructor.
+     */
     public function __construct()
     {
+        parent::__construct();
         $this->archived= false;
-        $this->createDate = new \DateTime();
         $this->publicationDate = new \DateTime();
     }
-
 
     /**
      * Get id
@@ -100,38 +80,6 @@ class Article
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * @return \DateTime
-     */
-    public function getCreateDate()
-    {
-        return $this->createDate;
-    }
-
-    /**
-     * @param \DateTime $createDate
-     */
-    public function setCreateDate($createDate)
-    {
-        $this->createDate = $createDate;
-    }
-
-    /**
-     * @return string
-     */
-    public function getTitle()
-    {
-        return $this->title;
-    }
-
-    /**
-     * @param string $title
-     */
-    public function setTitle($title)
-    {
-        $this->title = $title;
     }
 
     /**
@@ -185,22 +133,6 @@ class Article
     /**
      * @return mixed
      */
-    public function getUser()
-    {
-        return $this->user;
-    }
-
-    /**
-     * @param mixed $user
-     */
-    public function setUser($user)
-    {
-        $this->user = $user;
-    }
-
-    /**
-     * @return mixed
-     */
     public function getTag()
     {
         return $this->tag;
@@ -245,5 +177,6 @@ class Article
     {
         $this->diapofolder = $diapofolder;
     }
+
 }
 

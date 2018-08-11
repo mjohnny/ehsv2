@@ -24,7 +24,7 @@
                 <h4>le {{ nextEvent.startDate|localizeddate('none', 'none', null, null, 'd MMMM Y') }}</h4>
             </header>
             <ul class="actions">
-                <li><a href="{{ path('event_show', {'id': nextEvent.getId()}) }}"
+                <li><a href="{{ path('event_show', {'id': nextEvent.aliasPath}) }}"
                        class="button big special">{{ 'button.show more'|trans }}</a></li>
             </ul>
         </div>
@@ -45,7 +45,7 @@
                         </div>
                         <ul class="actions">
                             <li>
-                                <a href="{{ path('article_show', {'id': article.id}) }}"
+                                <a href="{{ path('article_show', {'id': article.aliasPath}) }}"
                                    class="button alt">{{ "button.show"|trans }}</a>
                             </li>
                         </ul>

@@ -6,21 +6,21 @@
         <div class="container">
             <ul class="actions event">
                 <li>
-                    <a href="{{ bachUrl }}" class="button alt">{{ 'button.back'|trans }}</a>
+                    <a href="{{ backUrl }}" class="button alt">{{ 'button.back'|trans }}</a>
                 </li>
                 <li>
-                    <a href="{{ path('program_show', {'id': event.id}) }}"
+                    <a href="{{ path('program_show', {'id': event.aliasPath}) }}"
                        class="button special">{{ 'button.show program'|trans }}</a>
                 </li>
                 {% if dispo and 'now'|date('Ymd') <= event.startDate|date('Ymd') %}
                     <li>
-                        <a href="{{ path('event_eventinscription_new', {'id': event.id}) }}"
+                        <a href="{{ path('event_eventinscription_new', {'id': event.aliasPath}) }}"
                            class="button special">{{ 'button.event register'|trans }}</a>
                     </li>
                 {% endif %}
                 {% if event.article %}
                     <li>
-                        <a href="{{ path('article_show', {'id': event.article.id}) }}"
+                        <a href="{{ path('article_show', {'id': event.article.aliasPath}) }}"
                            class="button alt">{{ 'button.event access conference'|trans }}</a>
                     </li>
                 {% endif %}
@@ -57,21 +57,21 @@
 
             <ul class="actions event">
                 <li>
-                    <a href="{{ bachUrl }}" class="button alt">{{ 'button.back'|trans }}</a>
+                    <a href="{{ backUrl }}" class="button alt">{{ 'button.back'|trans }}</a>
                 </li>
                 <li>
-                    <a href="{{ path('program_show', {'id': event.id}) }}"
+                    <a href="{{ path('program_show', {'id': event.aliasPath}) }}"
                        class="button special">{{ 'button.show program'|trans }}</a>
                 </li>
                 {% if dispo and 'now'|date('Ymd') <= event.startDate|date('Ymd') %}
                     <li>
-                        <a href="{{ path('event_eventinscription_new', {'id': event.id}) }}"
+                        <a href="{{ path('event_eventinscription_new', {'id': event.aliasPath}) }}"
                            class="button special">{{ 'button.event register'|trans }}</a>
                     </li>
                 {% endif %}
                 {% if event.article %}
                     <li>
-                        <a href="{{ path('article_show', {'id': event.article.id}) }}"
+                        <a href="{{ path('article_show', {'id': event.article.aliasPath}) }}"
                            class="button alt">{{ 'button.event access conference'|trans }}</a>
                     </li>
                 {% endif %}

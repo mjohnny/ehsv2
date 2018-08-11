@@ -6,6 +6,7 @@ use AppBundle\Entity\Event;
 use AppBundle\Entity\EventInscription;
 use AppBundle\Form\EventInscriptionType;
 use AppBundle\Services\EhsSendMailService;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -49,6 +50,7 @@ class EventController extends Controller
      * Finds and displays a event entity.
      *
      * @Route("/{id}", name="event_show")
+     * @ParamConverter("event", options={"mapping": {"id": "aliasPath"}})
      * @Method("GET")
      *
      * @param \Symfony\Component\HttpFoundation\Request $request
@@ -79,7 +81,7 @@ class EventController extends Controller
         return $this->render(
           'event/show.html.twig',
           [
-            'bachUrl' => $url,
+            'backUrl' => $url,
             'event' => $event,
             'form' => $form->createView(),
           ]
@@ -90,6 +92,7 @@ class EventController extends Controller
      * Finds and displays a program entity.
      *
      * @Route("/{id}/program", name="program_show")
+     * @ParamConverter("event", options={"mapping": {"id": "aliasPath"}})
      * @Method("GET")
      *
      * @param \AppBundle\Entity\Event $event
@@ -110,12 +113,14 @@ class EventController extends Controller
     /**
      * Creates a new eventInscription entity.
      *
-     * @Route("{id}/eventinscription", name="event_eventinscription_new")
+     * @Route("/{id}/eventinscription", name="event_eventinscription_new")
+     * @ParamConverter("event", options={"mapping": {"id": "aliasPath"}})
      * @Method({"GET", "POST"})
      *
      *{@inheritdoc}
      * @param \Symfony\Component\HttpFoundation\Request $request
      * @param \AppBundle\Entity\Event $event
+     * @throws
      *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
@@ -152,7 +157,7 @@ class EventController extends Controller
 
             return $this->redirectToRoute(
               'event_show',
-              ['id' => $event->getId()]
+              ['id' => $event->getAliasPath()]
             );
         }
 

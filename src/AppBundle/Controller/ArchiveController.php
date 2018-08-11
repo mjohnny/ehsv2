@@ -15,26 +15,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
  */
 class ArchiveController extends Controller
 {
-
-    /**
-     * Lists all archive entities.
-     *
-     * @Route("/", name="archive_index")
-     * @Method("GET")
-     *
-     * @return \Symfony\Component\HttpFoundation\Response
-     */
-    public function indexAction()
-    {
-        $em = $this->getDoctrine()->getManager();
-
-        $archives = $em->getRepository('AppBundle:Archive')->findAll();
-
-        return $this->render('archive/index.html.twig', array(
-            'archives' => $archives,
-        ));
-    }
-
     /**
      * Display presentation of the association.
      *
@@ -49,21 +29,4 @@ class ArchiveController extends Controller
         return $this->render('archive/present_asso.html.twig', ['archive'=>$presentAsso]);
     }
 
-    /**
-     * Finds and displays a archive entity.
-     *
-     * @Route("/{id}", name="archive_show")
-     * @Method("GET")
-     *
-     * @param \AppBundle\Entity\Archive $archive
-     *
-     * @return \Symfony\Component\HttpFoundation\Response
-     */
-    public function showAction(Archive $archive)
-    {
-
-        return $this->render('archive/show.html.twig', array(
-            'archive' => $archive,
-        ));
-    }
 }

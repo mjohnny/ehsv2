@@ -36,6 +36,7 @@ answer: Réponse
 Press: Presse
 Moderator: Modérateur
 Administrator: Administrateur
+aliasPath: alias d'url
 
 Event: Evénement
 Title: Titre
@@ -55,7 +56,7 @@ Add info: Information complémentaire
 
 Article: Documentation
 Publication date: Date de publication
-Create date: Date de création/modification
+Created date: Date de création
 Content: Contenu
 Diapofolder: Dossier du diapo
 article.diapo.label: Ajouter un diaporama
@@ -72,6 +73,7 @@ form:
     send: Envoyer
     reset: Effacer
     new diapo: Créer un diaporama
+    content: Contenu
 
 contact:
     subject: Sujet du message
