@@ -2,7 +2,7 @@ menu:
     home: Retour au site
     user: Adhérants
     contact: Gestion des contacts
-    gallery: Gestion des galleries
+    gallery: Gestion des galeries
     newsletter: NewsLetter
 
 action:
@@ -108,7 +108,7 @@ button:
     learn more: nous connaître
     show more: voir plus
     show: voir
-    show gallery: voir les galleries
+    show gallery: voir les galeries
     back: retour
     show program: Voir le programme
     event register: s'inscrire à l'événement
@@ -126,6 +126,6 @@ event:
 diapo:
     show : voir le diaporama
     diaporama: Diaporama
-    all galleries: toutes les galleries
+    all galleries: toutes les galeries
     created: Le diaporama a bien été créé.
     folder name: nom du dossier
