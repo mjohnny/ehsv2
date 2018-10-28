@@ -1,5 +1,5 @@
 {% extends 'base.html.twig' %}
-
+{% block title %}{{ event.title }}{% endblock %}
 {% block body %}
     {% set dispo = event.placeNumber - event.inscriptions|length %}
     <section id="main" class="wrapper eventShow">

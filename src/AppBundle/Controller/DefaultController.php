@@ -26,6 +26,10 @@ class DefaultController extends Controller
      */
     public function indexAction()
     {
+//        if ($this->isGranted('IS_AUTHENTICATED_FULLY') && !$this->getUser()->isUptodate()){
+//            $this->addFlash('warning',
+//                'Votre adhésion n\'est pas à jour');
+//        }
         $nextEvent = $this->getDoctrine()->getRepository('AppBundle:Event')->findBy([], ['startDate' => 'DESC'], 1);
         $lastArticles = $this->getDoctrine()->getRepository('AppBundle:Article')->getNoArchivedLastArticles();
 

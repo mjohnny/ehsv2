@@ -1,5 +1,5 @@
 {% extends 'base.html.twig' %}
-
+{% block title %}{{ article.title }}{% endblock %}
 {% block stylesheets %}
     {% if article.diapofolder['diapofolder'] is defined and article.diapofolder['diapofolder'] is not null %}
         <link rel="stylesheet" type="text/css" href="{{ asset('ehs/js/engine1/style.css') }}" />
@@ -38,7 +38,7 @@
             </ul>
 
             <header class="major special">
-                <h2>{{ article.title|raw }}</h2>
+                <h2>{{ article.title }}</h2>
             </header>
 
             <p>{{ article.content|raw }}</p>

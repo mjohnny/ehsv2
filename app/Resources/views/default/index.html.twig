@@ -20,7 +20,7 @@
     <section id="three" class="wrapper style3 special">
         <div class="inner">
             <header class="major narrow	">
-                <h2>{{ nextEvent.title|raw }}</h2>
+                <h2>{{ nextEvent.title }}</h2>
                 <h4>le {{ nextEvent.startDate|localizeddate('none', 'none', null, null, 'd MMMM Y') }}</h4>
             </header>
             <ul class="actions">
@@ -39,7 +39,7 @@
                     <span class="image"><img id="image{{ loop.index0 }}" src="{{ asset('ehs/images/ehs.png') }}"
                                              alt="logo ehs"/></span>
                     <div class="content">
-                        <h2>{{ article.title|raw }}</h2>
+                        <h2>{{ article.title }}</h2>
                         <div class="frontShow">
                             {{ article.content|raw }}
                         </div>
