@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 {% block title %}{{ event.title }}{% endblock %}
 {% block body %}
-    {% set dispo = event.placeNumber - event.inscriptions|length %}
+    {% set dispo = (event.placeNumber - event.inscriptions|length) > 0 ? true : false %}
     <section id="main" class="wrapper eventShow">
         <div class="container">
             <ul class="actions event">
@@ -47,7 +47,7 @@
                 </li>
             </ul>
 
-            {% if 'now'|date('Ymd') <= event.startDate|date('Ymd') and not dispo %}
+            {% if event.placeNumber != 0 and 'now'|date('Ymd') <= event.startDate|date('Ymd') and not dispo %}
                 <div class="bg-info">
                     <span>{{ 'event.no more place'|trans }}</span>
                 </div>

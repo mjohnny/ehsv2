@@ -34,7 +34,7 @@ class EventController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         $events = $em->getRepository('AppBundle:Event')->findBy(
-          [],
+          ['archived' => '0'],
           ['startDate' => 'DESC']
         );
 
